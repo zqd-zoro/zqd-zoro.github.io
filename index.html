@@ -481,127 +481,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (5)/" itemprop="url">Apache SSI 远程命令执行漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (3)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -799,6 +678,127 @@
           
             <hr>
 <h1 id="Apache-HTTPD-未知后缀解析漏洞"><a href="#Apache-HTTPD-未知后缀解析漏洞" class="headerlink" title="Apache HTTPD 未知后缀解析漏洞"></a>Apache HTTPD 未知后缀解析漏洞</h1><p>改漏洞属于用户配置不当产生的漏洞，与具体中间件版本无关。<br>与其说这是漏洞，不如说是apache的特性，就是我们平常所说的从右向左解析是一样的。<br>当apache遇到无法识别解析的文件后缀时，会向前解析，如xxx.php.123.456,在mime.types文件中如果不存在.123/.456这两种后缀，那么apache会将该文件解析为php。<br>同样也可以在httpd.conf文件中更改参数或是直接配置.htaccess。<br>首先创建一个名为zqd.php.jpg的一句话木马。<br><a href="https://imgchr.com/i/mACdr8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACdr8.png" alt="mACdr8.png"></a><br>这里名称保存为zqd.php.jpg，是为了绕过黑名单机制<br>访问靶机 然后上传<br><a href="https://imgchr.com/i/mACc2q" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACc2q.png" alt="mACc2q.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mAC7GR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAC7GR.png" alt="mAC7GR.png"></a><br>连接蚁剑<br><a href="https://imgchr.com/i/mACXqO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACXqO.png" alt="mACXqO.png"></a><br>成功</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/ld (5)/" itemprop="url">Apache SSI 远程命令执行漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
 
           
         
