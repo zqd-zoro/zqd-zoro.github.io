@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="DNS域传送漏洞,">
 
 
 
@@ -79,13 +79,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）/index.html">
+<meta name="description" content="DNS域传送漏洞DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞 在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：发送axfr类型的dns请求">
+<meta name="keywords" content="DNS域传送漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS域传送漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/ld (16)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DNS域传送漏洞DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞 在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：发送axfr类型的dns请求">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEQfDe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEQ5Ed.png">
+<meta property="og:updated_time" content="2019-08-15T07:45:27.086Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="DNS域传送漏洞">
+<meta name="twitter:description" content="DNS域传送漏洞DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞 在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：发送axfr类型的dns请求">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mEQfDe.png">
 
 
 
@@ -115,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/28/ld (16)/">
 
 
 
 
 
-  <title>Tag: Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600） | Hexo</title>
+  <title>DNS域传送漏洞 | Hexo</title>
   
 
 
@@ -140,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,52 +222,153 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (16)/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/07/27/ld (12)/" itemprop="url">
-              
-                <span itemprop="name">Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">DNS域传送漏洞</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-27T09:16:18+08:00" content="2019-07-27">
-          07-27
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
+                2019-07-28
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞</p>
+<p>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mEQfDe" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEQfDe.png" alt="mEQfDe.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mEQ5Ed" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEQ5Ed.png" alt="mEQ5Ed.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DNS域传送漏洞/" rel="tag"># DNS域传送漏洞</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/ld (12)/" rel="next" title="Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）">
+                <i class="fa fa-chevron-left"></i> Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/28/ld (15)/" rel="prev" title="ElasticSearch 命令执行漏洞（CVE-2014-3120）">
+                ElasticSearch 命令执行漏洞（CVE-2014-3120） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -267,6 +376,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -287,8 +400,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -339,6 +461,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS域传送漏洞"><span class="nav-number">1.</span> <span class="nav-text">DNS域传送漏洞</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -472,6 +610,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
