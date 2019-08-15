@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Apache SSI 远程命令执行漏洞,">
+  <meta name="keywords" content="DNS域传送漏洞,">
 
 
 
@@ -79,24 +79,21 @@
 
 
 
-<meta name="description" content="Apache SSI 远程命令执行漏洞漏洞原理在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用语法执行任意命令。&amp;amp;emsp；先创建一个php文件然后打开靶机上传文件然后发现不可以正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：然后通过bp拦截 把ss.php 后缀改成ss">
-<meta name="keywords" content="Apache SSI 远程命令执行漏洞">
+<meta name="description" content="DNS域传送漏洞DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞&amp;emsp;在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：发送axfr类型的">
+<meta name="keywords" content="DNS域传送漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Apache SSI 远程命令执行漏洞">
-<meta property="og:url" content="http://yoursite.com/2019/07/25/ld (5)/index.html">
+<meta property="og:title" content="DNS域传送漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/07/26/ld (10)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Apache SSI 远程命令执行漏洞漏洞原理在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用语法执行任意命令。&amp;amp;emsp；先创建一个php文件然后打开靶机上传文件然后发现不可以正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：然后通过bp拦截 把ss.php 后缀改成ss">
+<meta property="og:description" content="DNS域传送漏洞DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞&amp;emsp;在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：发送axfr类型的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAP3LT.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAPJwF.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAPaWR.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAPseO.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAPgFH.png">
-<meta property="og:updated_time" content="2019-08-14T16:06:58.853Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mE9VMV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mE9GM6.png">
+<meta property="og:updated_time" content="2019-08-15T06:30:10.830Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Apache SSI 远程命令执行漏洞">
-<meta name="twitter:description" content="Apache SSI 远程命令执行漏洞漏洞原理在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用语法执行任意命令。&amp;amp;emsp；先创建一个php文件然后打开靶机上传文件然后发现不可以正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：然后通过bp拦截 把ss.php 后缀改成ss">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mAP3LT.png">
+<meta name="twitter:title" content="DNS域传送漏洞">
+<meta name="twitter:description" content="DNS域传送漏洞DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞&amp;emsp;在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：发送axfr类型的">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mE9VMV.png">
 
 
 
@@ -126,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/25/ld (5)/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/26/ld (10)/">
 
 
 
 
 
-  <title>Apache SSI 远程命令执行漏洞 | Hexo</title>
+  <title>DNS域传送漏洞 | Hexo</title>
   
 
 
@@ -239,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -256,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Apache SSI 远程命令执行漏洞</h1>
+          <h1 class="post-title" itemprop="name headline">DNS域传送漏洞</h1>
         
 
         <div class="post-meta">
@@ -268,8 +265,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
               </time>
             
 
@@ -307,7 +304,7 @@
 
       
         <hr>
-<h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
+<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
 
       
     </div>
@@ -325,7 +322,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Apache-SSI-远程命令执行漏洞/" rel="tag"># Apache SSI 远程命令执行漏洞</a>
+            <a href="/tags/DNS域传送漏洞/" rel="tag"># DNS域传送漏洞</a>
           
         </div>
       
@@ -338,8 +335,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/25/ld (6)/" rel="next" title="Couchdb 垂直权限绕过漏洞（CVE-2017-12635）">
-                <i class="fa fa-chevron-left"></i> Couchdb 垂直权限绕过漏洞（CVE-2017-12635）
+              <a href="/2019/07/26/ld (7)/" rel="next" title="Couchdb 任意命令执行漏洞（CVE-2017-12636）">
+                <i class="fa fa-chevron-left"></i> Couchdb 任意命令执行漏洞（CVE-2017-12636）
               </a>
             
           </div>
@@ -347,10 +344,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/25/ld (3)/" rel="prev" title="Apache HTTPD 换行解析漏洞（CVE-2017-15715）">
-                Apache HTTPD 换行解析漏洞（CVE-2017-15715） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -473,7 +466,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-SSI-远程命令执行漏洞"><span class="nav-number">1.</span> <span class="nav-text">Apache SSI 远程命令执行漏洞</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS域传送漏洞"><span class="nav-number">1.</span> <span class="nav-text">DNS域传送漏洞</span></a></li></ol></div>
             
 
           </div>
