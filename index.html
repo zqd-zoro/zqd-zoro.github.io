@@ -229,6 +229,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/byapache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/30/byapache/" itemprop="url">CentOS 7下编译安装 apache</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-30T09:16:18+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="CentOS-7下编译安装-apache"><a href="#CentOS-7下编译安装-apache" class="headerlink" title="CentOS 7下编译安装 apache"></a>CentOS 7下编译安装 apache</h1><p>1.在每安装一个服务都要养成查看是否安装，如果安装则需要卸载<br> rpm -qa | grep httpd<br> 安装需要的组件<br>yum -y install libxml2-devel<br>yum -y install openssl-devel<br>yum -y install expat-devel<br>yum -y install gcc gcc-c++<br>2.安装apache2.4.23 （是编译安装那么就会需要用到源码包）在安装apache2.4.23需要的源码包如下:<br>httpd-2.4.23.tar.gz( wget <a href="http://httpd.apache.org/download.cgi#apache24" target="_blank" rel="noopener">http://httpd.apache.org/download.cgi#apache24</a> )<br>apr-1.5.2.tar.gz ( wget <a href="http://mirrors.hust.edu.cn/apache//apr/apr-1.5.2.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache//apr/apr-1.5.2.tar.gz</a>)<br>apr-util-1.5.4.tar.gz (wget <a href="http://mirrors.hust.edu.cn/apache//apr/apr-util-1.5.4.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache//apr/apr-util-1.5.4.tar.gz</a>)<br> zlib-1.2.8.tar.gz(wget <a href="http://www.zlib.net/fossils/zlib-1.2.8.tar.gz" target="_blank" rel="noopener">http://www.zlib.net/fossils/zlib-1.2.8.tar.gz</a>)<br> pcre-8.39.tar.gz(wget <a href="https://ftp.pcre.org/pub/pcre/pcre-8.39.tar.gz" target="_blank" rel="noopener">https://ftp.pcre.org/pub/pcre/pcre-8.39.tar.gz</a>)<br>然后解压到 /data/server/下<br><a href="https://imgchr.com/i/mZEx4f" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZEx4f.png" alt="mZEx4f.png"></a><br>然后cd到相对应的路径下进行编译安装<br>(执行1../configure,2.make,3.make install ,三个命令来编译安装这个东西)<br>然后检查是否安装了httpd_devel，如果没有安装，执行yum install httpd-devel,进行安装，如果不安装的话，后期不会生成.so的扩展文件。<br>. /configure –prefix=/data/server<br><a href="https://imgchr.com/i/mZViuj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZViuj.png" alt="mZViuj.png"></a><br>然后用make   make  install  分两步进行编译安装  用echo $? 查看下错误<br><a href="https://imgchr.com/i/mZVZ5V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVZ5V.png" alt="mZVZ5V.png"></a><br>apr-util需要依赖  apr    所以要这样执行 –with-apr=/data/server/apr<br><a href="https://imgchr.com/i/mZVKv4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVKv4.png" alt="mZVKv4.png"></a><br>然后用make   make  install  分两步进行编译安装  用echo $? 查看下错误 同上<br><a href="https://imgchr.com/i/mZV1bR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZV1bR.png" alt="mZV1bR.png"></a><br>同样 make  make install   同上<br><a href="https://imgchr.com/i/mZVGUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVGUx.png" alt="mZVGUx.png"></a><br> ./configure –prefix=/data/server/apache-2.4.39  –with-apr=/data/server/apr –with-apr-util=/data/server/apr-util –with-pcre=/data/server/pcre –with-zlib=/data/server/zlib  –enable-so<br>然后到bin下启动 然后访问IP就安装好apache了<br><a href="https://imgchr.com/i/mZVU2D" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVU2D.png" alt="mZVU2D.png"></a><br>关闭防火墙  systemctl stop firewalld<br>1 下载php5.6安装包到/usr/loca/src<br>解压到 /data/server/下 改名php56<br>2 cd /data/server/apache24/conf<br>vim httpd.conf   修改配置文件<br>(在loadmodule后添加  loadmodule php5_modules/libphp5.so<br>  在Addtype application/x-gizp.gz.tgz后面添加 AddType application/x-httpd-php //.php 后面有个空格<br>3<a href="https://imgchr.com/i/mZVjsJ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVjsJ.jpg" alt="mZVjsJ.jpg"></a><br>4编译安装php<br>PHP编译参数：<br>./configure –prefix=/data/server/php56  –with-iconv-dir –with-freetype-dir –with-jpeg-dir –with-png-dir –with-zlib –with-libxml-dir –enable-simplexml –enable-xml –disable-rpath –enable-bcmath –enable-soap –enable-zip –with-curl –enable-fpm –with-fpm-user=www –with-fpm-group=www –enable-mbstring –enable-sockets –with-gd –with-openssl –with-mhash –enable-opcache –disable-fileinfo      –with-apxs2=/data/server/apache24/bin/apxs<br>5 到这个目录下启动  关闭防火墙<br><a href="https://imgchr.com/i/mZZFzD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZZFzD.png" alt="mZZFzD.png"></a><br>报错端口冲突  修改端口<br>cd /data/server/apache24/conf<br>vim httpd.conf<br>找到Listen 80这一行，修改为<br>Listen  8999  (我这修改成8999)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/Apache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -376,7 +497,7 @@ export PATH
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/byapache/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/bytomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -395,7 +516,7 @@ export PATH
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/30/byapache/" itemprop="url">CentOS 7下编译安装 apache</a></h1>
+                <a class="post-title-link" href="/2019/07/30/bytomcat/" itemprop="url">CentOS 7下编译安装 tomcat</a></h1>
         
 
         <div class="post-meta">
@@ -448,7 +569,7 @@ export PATH
         
           
             <hr>
-<h1 id="CentOS-7下编译安装-apache"><a href="#CentOS-7下编译安装-apache" class="headerlink" title="CentOS 7下编译安装 apache"></a>CentOS 7下编译安装 apache</h1><p>1.在每安装一个服务都要养成查看是否安装，如果安装则需要卸载<br> rpm -qa | grep httpd<br> 安装需要的组件<br>yum -y install libxml2-devel<br>yum -y install openssl-devel<br>yum -y install expat-devel<br>yum -y install gcc gcc-c++<br>2.安装apache2.4.23 （是编译安装那么就会需要用到源码包）在安装apache2.4.23需要的源码包如下:<br>httpd-2.4.23.tar.gz( wget <a href="http://httpd.apache.org/download.cgi#apache24" target="_blank" rel="noopener">http://httpd.apache.org/download.cgi#apache24</a> )<br>apr-1.5.2.tar.gz ( wget <a href="http://mirrors.hust.edu.cn/apache//apr/apr-1.5.2.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache//apr/apr-1.5.2.tar.gz</a>)<br>apr-util-1.5.4.tar.gz (wget <a href="http://mirrors.hust.edu.cn/apache//apr/apr-util-1.5.4.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache//apr/apr-util-1.5.4.tar.gz</a>)<br> zlib-1.2.8.tar.gz(wget <a href="http://www.zlib.net/fossils/zlib-1.2.8.tar.gz" target="_blank" rel="noopener">http://www.zlib.net/fossils/zlib-1.2.8.tar.gz</a>)<br> pcre-8.39.tar.gz(wget <a href="https://ftp.pcre.org/pub/pcre/pcre-8.39.tar.gz" target="_blank" rel="noopener">https://ftp.pcre.org/pub/pcre/pcre-8.39.tar.gz</a>)<br>然后解压到 /data/server/下<br><a href="https://imgchr.com/i/mZEx4f" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZEx4f.png" alt="mZEx4f.png"></a><br>然后cd到相对应的路径下进行编译安装<br>(执行1../configure,2.make,3.make install ,三个命令来编译安装这个东西)<br>然后检查是否安装了httpd_devel，如果没有安装，执行yum install httpd-devel,进行安装，如果不安装的话，后期不会生成.so的扩展文件。<br>. /configure –prefix=/data/server<br><a href="https://imgchr.com/i/mZViuj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZViuj.png" alt="mZViuj.png"></a><br>然后用make   make  install  分两步进行编译安装  用echo $? 查看下错误<br><a href="https://imgchr.com/i/mZVZ5V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVZ5V.png" alt="mZVZ5V.png"></a><br>apr-util需要依赖  apr    所以要这样执行 –with-apr=/data/server/apr<br><a href="https://imgchr.com/i/mZVKv4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVKv4.png" alt="mZVKv4.png"></a><br>然后用make   make  install  分两步进行编译安装  用echo $? 查看下错误 同上<br><a href="https://imgchr.com/i/mZV1bR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZV1bR.png" alt="mZV1bR.png"></a><br>同样 make  make install   同上<br><a href="https://imgchr.com/i/mZVGUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVGUx.png" alt="mZVGUx.png"></a><br> ./configure –prefix=/data/server/apache-2.4.39  –with-apr=/data/server/apr –with-apr-util=/data/server/apr-util –with-pcre=/data/server/pcre –with-zlib=/data/server/zlib  –enable-so<br>然后到bin下启动 然后访问IP就安装好apache了<br><a href="https://imgchr.com/i/mZVU2D" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVU2D.png" alt="mZVU2D.png"></a><br>关闭防火墙  systemctl stop firewalld<br>1 下载php5.6安装包到/usr/loca/src<br>解压到 /data/server/下 改名php56<br>2 cd /data/server/apache24/conf<br>vim httpd.conf   修改配置文件<br>(在loadmodule后添加  loadmodule php5_modules/libphp5.so<br>  在Addtype application/x-gizp.gz.tgz后面添加 AddType application/x-httpd-php //.php 后面有个空格<br>3<a href="https://imgchr.com/i/mZVjsJ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZVjsJ.jpg" alt="mZVjsJ.jpg"></a><br>4编译安装php<br>PHP编译参数：<br>./configure –prefix=/data/server/php56  –with-iconv-dir –with-freetype-dir –with-jpeg-dir –with-png-dir –with-zlib –with-libxml-dir –enable-simplexml –enable-xml –disable-rpath –enable-bcmath –enable-soap –enable-zip –with-curl –enable-fpm –with-fpm-user=www –with-fpm-group=www –enable-mbstring –enable-sockets –with-gd –with-openssl –with-mhash –enable-opcache –disable-fileinfo      –with-apxs2=/data/server/apache24/bin/apxs<br>5 到这个目录下启动  关闭防火墙<br><a href="https://imgchr.com/i/mZZFzD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZZFzD.png" alt="mZZFzD.png"></a><br>报错端口冲突  修改端口<br>cd /data/server/apache24/conf<br>vim httpd.conf<br>找到Listen 80这一行，修改为<br>Listen  8999  (我这修改成8999)</p>
+<h1 id="CentOS-7下编译安装-tomcat"><a href="#CentOS-7下编译安装-tomcat" class="headerlink" title="CentOS 7下编译安装 tomcat"></a>CentOS 7下编译安装 tomcat</h1><p>Linux下安装Tomcat。<br>1.首先需要安装他的依赖包jdk并配置Java。<br>我们去浏览器搜索Java，并找到下载页面。<br>然后运用wget进行下载<br>如下图：<br><a href="https://imgchr.com/i/mZey38" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZey38.png" alt="mZey38.png"></a><br>注：需要把红色箭头标注的地方选中才可以进行复制链接。<br>2.接下来把下载好的安装包解压。<br><a href="https://imgchr.com/i/mZeHvF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZeHvF.png" alt="mZeHvF.png"></a><br>我是解压到了/data/server。<br>3.接下来我们修改/etc下的配置文件（配置环境变量）<br>vi /etc/profile<br><a href="https://imgchr.com/i/mZeOb9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZeOb9.png" alt="mZeOb9.png"></a><br>然后 :wq退出并保存。<br>保存之后通过source /etc/profile命令使修改的配置生效。<br>然后java -version，检测版本，看是否成功。<br><a href="https://imgchr.com/i/mZntwd" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZntwd.png" alt="mZntwd.png"></a><br>4.下面开始安装tomcat。<br>浏览器搜索tomcat，并找到下载页面。<br>wget进行下载。<br>然后对下载的安装包进行解压。<br>如下图：<br><a href="https://imgchr.com/i/mZnvp6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZnvp6.png" alt="mZnvp6.png"></a><br>我这个还是解压到了/data/server。<br>5.接下来进入安装好的tomcat的bin目录下,并启动它。<br>cd /data/server/apache-tomcat-8.5.40/bin<br>./startup.sh<br><a href="https://imgchr.com/i/mZuP7d" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZuP7d.png" alt="mZuP7d.png"></a><br>6.启动成功后，为了保险，使用ps aux结合grep，查找一下tomcat的进程，看是否成功启动。<br><a href="https://imgchr.com/i/mZuung" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZuung.png" alt="mZuung.png"></a><br>7.成功启动后在浏览器输入<a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a> （如果不是本机，则输入对应的IP，就像我这样，我的IP是172.31.5.103，所以如下图）<br><a href="https://imgchr.com/i/mZuM7j" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZuM7j.png" alt="mZuM7j.png"></a><br>这时我们发现无法访问。<br>是因为防火墙，现在我们把防火墙关掉试一下：systemctl stop firewalld。<br><a href="https://imgchr.com/i/mZu3hq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZu3hq.png" alt="mZu3hq.png"></a><br>好了，关掉了防火墙，我们再试一下。<br><a href="https://imgchr.com/i/mZu4UA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZu4UA.png" alt="mZu4UA.png"></a><br>8.现在我们看到关掉防火墙之后，就可以成功跳转页面了。<br>9.安装成功！</p>
 
           
         
@@ -1346,132 +1467,11 @@ export PATH
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (10)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (10)/" itemprop="url">DNS域传送漏洞</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="DNS域传送漏洞"><a href="#DNS域传送漏洞" class="headerlink" title="DNS域传送漏洞"></a>DNS域传送漏洞</h1><p>DNS协议支持使用axfr类型的记录进行区域传送，用来解决主从同步的问题。如果管理员在配置DNS服务器的时候没有限制允许获取记录的来源，将会导致DNS域传送漏洞<br>&emsp;<br>在Linux下，我们可以使用dig命令来发送dns请求。比如，我们可以用dig @your-ip <a href="http://www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：" target="_blank" rel="noopener">www.vulhub.org获取域名www.vulhub.org在目标dns服务器上的A记录：</a><br><a href="https://imgchr.com/i/mE9VMV" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9VMV.png" alt="mE9VMV.png"></a><br>发送axfr类型的dns请求：dig @192.168.199.151 -t axfr vulhub.org：<br><a href="https://imgchr.com/i/mE9GM6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mE9GM6.png" alt="mE9GM6.png"></a><br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。<br>可见，我获取到了vulhub.org的所有子域名记录，这里存在DNS域传送漏洞。<br>我们也可以用nmap script来扫描该漏洞：nmap –script dns-zone<br>transfer.nse –script-args “dns-zone-transfer.domain=vulhub.org” -Pn<br>-p 53 192.168.199.151。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1517,7 +1517,7 @@ export PATH
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1530,7 +1530,7 @@ export PATH
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

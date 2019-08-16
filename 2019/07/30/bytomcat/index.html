@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行,">
+  <meta name="keywords" content="CentOS 7下编译安装 tomcat,">
 
 
 
@@ -79,23 +79,29 @@
 
 
 
-<meta name="description" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。&amp;emsp;搭建漏洞环境（这里我已经搭建好了  直接启动）在相应的目录下启动docker-compose up -d&amp;ems">
-<meta name="keywords" content="Discuz 7.x&#x2F;6.x 全局变量防御绕过导致代码执行">
+<meta name="description" content="CentOS 7下编译安装 tomcatLinux下安装Tomcat。1.首先需要安装他的依赖包jdk并配置Java。我们去浏览器搜索Java，并找到下载页面。然后运用wget进行下载如下图：注：需要把红色箭头标注的地方选中才可以进行复制链接。2.接下来把下载好的安装包解压。我是解压到了/data/server。3.接下来我们修改/etc下的配置文件（配置环境变量）vi /etc/profile">
+<meta name="keywords" content="CentOS 7下编译安装 tomcat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Discuz 7.x&#x2F;6.x 全局变量防御绕过导致代码执行">
-<meta property="og:url" content="http://yoursite.com/2019/07/26/ld (8)/index.html">
+<meta property="og:title" content="CentOS 7下编译安装 tomcat">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/bytomcat/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。&amp;emsp;搭建漏洞环境（这里我已经搭建好了  直接启动）在相应的目录下启动docker-compose up -d&amp;ems">
+<meta property="og:description" content="CentOS 7下编译安装 tomcatLinux下安装Tomcat。1.首先需要安装他的依赖包jdk并配置Java。我们去浏览器搜索Java，并找到下载页面。然后运用wget进行下载如下图：注：需要把红色箭头标注的地方选中才可以进行复制链接。2.接下来把下载好的安装包解压。我是解压到了/data/server。3.接下来我们修改/etc下的配置文件（配置环境变量）vi /etc/profile">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mADyDA.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mADh8S.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAriUx.png">
-<meta property="og:image" content="https://s2.ax1x.com/2019/08/15/mAr8G8.png">
-<meta property="og:updated_time" content="2019-08-15T02:50:30.656Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZey38.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZeHvF.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZeOb9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZntwd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZnvp6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZuP7d.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZuung.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZuM7j.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZu3hq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/16/mZu4UA.png">
+<meta property="og:updated_time" content="2019-08-16T02:20:19.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Discuz 7.x&#x2F;6.x 全局变量防御绕过导致代码执行">
-<meta name="twitter:description" content="Discuz 7.x/6.x 全局变量防御绕过导致代码执行由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。&amp;emsp;搭建漏洞环境（这里我已经搭建好了  直接启动）在相应的目录下启动docker-compose up -d&amp;ems">
-<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/15/mADyDA.png">
+<meta name="twitter:title" content="CentOS 7下编译安装 tomcat">
+<meta name="twitter:description" content="CentOS 7下编译安装 tomcatLinux下安装Tomcat。1.首先需要安装他的依赖包jdk并配置Java。我们去浏览器搜索Java，并找到下载页面。然后运用wget进行下载如下图：注：需要把红色箭头标注的地方选中才可以进行复制链接。2.接下来把下载好的安装包解压。我是解压到了/data/server。3.接下来我们修改/etc下的配置文件（配置环境变量）vi /etc/profile">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/16/mZey38.png">
 
 
 
@@ -125,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/26/ld (8)/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/30/bytomcat/">
 
 
 
 
 
-  <title>Discuz 7.x/6.x 全局变量防御绕过导致代码执行 | Hexo</title>
+  <title>CentOS 7下编译安装 tomcat | Hexo</title>
   
 
 
@@ -238,7 +244,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/bytomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -255,7 +261,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1>
+          <h1 class="post-title" itemprop="name headline">CentOS 7下编译安装 tomcat</h1>
         
 
         <div class="post-meta">
@@ -267,8 +273,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-30T09:16:18+08:00">
+                2019-07-30
               </time>
             
 
@@ -306,7 +312,7 @@
 
       
         <hr>
-<h1 id="Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致$_REQUEST中不再包含$_COOKIE，我们通过在Cookie中传入$GLOBALS来覆盖全局变量，造成代码执行漏洞。<br>&emsp;<br>搭建漏洞环境（这里我已经搭建好了  直接启动）<br>在相应的目录下启动<br>docker-compose up -d<br><a href="https://imgchr.com/i/mADyDA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADyDA.png" alt="mADyDA.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mADh8S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mADh8S.png" alt="mADh8S.png"></a><br>启动后，访问<a href="http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。" target="_blank" rel="noopener">http://your-ip:8080/install/来安装discuz，数据库地址填写db，数据库名为discuz，数据库账号密码均为root。</a><br><a href="https://imgchr.com/i/mAriUx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAriUx.png" alt="mAriUx.png"></a><br>安装成功后，直接找一个已存在的帖子，向其发送数据包，并在Cookie中增加<br>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();<br>&emsp;<br>phpinfo已成功执行：<br><a href="https://imgchr.com/i/mAr8G8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAr8G8.png" alt="mAr8G8.png"></a></p>
+<h1 id="CentOS-7下编译安装-tomcat"><a href="#CentOS-7下编译安装-tomcat" class="headerlink" title="CentOS 7下编译安装 tomcat"></a>CentOS 7下编译安装 tomcat</h1><p>Linux下安装Tomcat。<br>1.首先需要安装他的依赖包jdk并配置Java。<br>我们去浏览器搜索Java，并找到下载页面。<br>然后运用wget进行下载<br>如下图：<br><a href="https://imgchr.com/i/mZey38" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZey38.png" alt="mZey38.png"></a><br>注：需要把红色箭头标注的地方选中才可以进行复制链接。<br>2.接下来把下载好的安装包解压。<br><a href="https://imgchr.com/i/mZeHvF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZeHvF.png" alt="mZeHvF.png"></a><br>我是解压到了/data/server。<br>3.接下来我们修改/etc下的配置文件（配置环境变量）<br>vi /etc/profile<br><a href="https://imgchr.com/i/mZeOb9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZeOb9.png" alt="mZeOb9.png"></a><br>然后 :wq退出并保存。<br>保存之后通过source /etc/profile命令使修改的配置生效。<br>然后java -version，检测版本，看是否成功。<br><a href="https://imgchr.com/i/mZntwd" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZntwd.png" alt="mZntwd.png"></a><br>4.下面开始安装tomcat。<br>浏览器搜索tomcat，并找到下载页面。<br>wget进行下载。<br>然后对下载的安装包进行解压。<br>如下图：<br><a href="https://imgchr.com/i/mZnvp6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZnvp6.png" alt="mZnvp6.png"></a><br>我这个还是解压到了/data/server。<br>5.接下来进入安装好的tomcat的bin目录下,并启动它。<br>cd /data/server/apache-tomcat-8.5.40/bin<br>./startup.sh<br><a href="https://imgchr.com/i/mZuP7d" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZuP7d.png" alt="mZuP7d.png"></a><br>6.启动成功后，为了保险，使用ps aux结合grep，查找一下tomcat的进程，看是否成功启动。<br><a href="https://imgchr.com/i/mZuung" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZuung.png" alt="mZuung.png"></a><br>7.成功启动后在浏览器输入<a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a> （如果不是本机，则输入对应的IP，就像我这样，我的IP是172.31.5.103，所以如下图）<br><a href="https://imgchr.com/i/mZuM7j" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZuM7j.png" alt="mZuM7j.png"></a><br>这时我们发现无法访问。<br>是因为防火墙，现在我们把防火墙关掉试一下：systemctl stop firewalld。<br><a href="https://imgchr.com/i/mZu3hq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZu3hq.png" alt="mZu3hq.png"></a><br>好了，关掉了防火墙，我们再试一下。<br><a href="https://imgchr.com/i/mZu4UA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/16/mZu4UA.png" alt="mZu4UA.png"></a><br>8.现在我们看到关掉防火墙之后，就可以成功跳转页面了。<br>9.安装成功！</p>
 
       
     </div>
@@ -324,7 +330,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Discuz-7-x-6-x-全局变量防御绕过导致代码执行/" rel="tag"># Discuz 7.x/6.x 全局变量防御绕过导致代码执行</a>
+            <a href="/tags/CentOS-7下编译安装-tomcat/" rel="tag"># CentOS 7下编译安装 tomcat</a>
           
         </div>
       
@@ -337,8 +343,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/26/ld (9)/" rel="next" title="Discuz!X 3.4 前台任意文件删除漏洞复现">
-                <i class="fa fa-chevron-left"></i> Discuz!X 3.4 前台任意文件删除漏洞复现
+              <a href="/2019/07/29/PHPstudy+wordpress/" rel="next" title="CentOS 7下PHPstudy+WordPress安装详解">
+                <i class="fa fa-chevron-left"></i> CentOS 7下PHPstudy+WordPress安装详解
               </a>
             
           </div>
@@ -347,8 +353,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/26/ld (7)/" rel="prev" title="Couchdb 任意命令执行漏洞（CVE-2017-12636）">
-                Couchdb 任意命令执行漏洞（CVE-2017-12636） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/30/Apache/" rel="prev" title="CentOS 7下安装Apache">
+                CentOS 7下安装Apache <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -472,7 +478,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><span class="nav-number">1.</span> <span class="nav-text">Discuz 7.x/6.x 全局变量防御绕过导致代码执行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS-7下编译安装-tomcat"><span class="nav-number">1.</span> <span class="nav-text">CentOS 7下编译安装 tomcat</span></a></li></ol></div>
             
 
           </div>
